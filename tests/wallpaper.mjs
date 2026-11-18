@@ -42,7 +42,7 @@ const layer = () => document.querySelector('#bg-layer');
 const iconOf = (n) => [...document.querySelectorAll('.appicon')]
   .find((e) => e.querySelector('small')?.textContent === n);
 const shopPill = (n) => [...document.querySelectorAll('.shop-card')]
-  .find((el) => el.querySelector('.name')?.textContent?.startsWith(n))?.querySelector('.pill');
+  .find((el) => el.querySelector('.shop-card-name')?.textContent?.startsWith(n))?.querySelector('.pill');
 const closeApp = async () => {
   const back = document.querySelector('.btn-back');
   if (back) { back.click(); await sleep(300); }

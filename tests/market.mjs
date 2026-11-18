@@ -41,7 +41,7 @@ const check = (name, cond, extra = '') => {
 const iconByName = (name) => [...document.querySelectorAll('.appicon')]
   .find((el) => el.querySelector('small')?.textContent === name);
 const shopItem = (name) => [...document.querySelectorAll('.shop-card')]
-  .find((el) => el.querySelector('.name')?.textContent?.startsWith(name));
+  .find((el) => el.querySelector('.shop-card-name')?.textContent?.startsWith(name));
 const clickShop = async (name) => {
   const item = shopItem(name);
   if (!item) throw new Error(`商店里找不到「${name}」`);
@@ -56,10 +56,10 @@ check('默认主题已注入', cssVar('--bg') === '#0d0f13', cssVar('--bg'));
 // 打开商店
 iconByName('商店').click();
 await sleep(400);
-check('商店打开', !!document.querySelector('.shop-list'));
+check('商店打开', !!document.querySelector('.shop-grid'));
 check('有搜索框', !!document.querySelector('.shop-search'));
-check('有分类筛选', document.querySelectorAll('.chip').length >= 4,
-  `${document.querySelectorAll('.chip').length} 个分类`);
+check('左边有类型目录', document.querySelectorAll('.nav-item').length >= 4,
+  `${document.querySelectorAll('.nav-item').length} 项`);
 const cards = document.querySelectorAll('.shop-card').length;
 check('货架上有商品', cards >= 6, `${cards} 个`);
 
@@ -67,7 +67,7 @@ check('货架上有商品', cards >= 6, `${cards} 个`);
 await clickShop('侧边栏');
 check('切到侧边栏后，桌面真的换了', !!document.querySelector('.sidebar-list'));
 check('旧桌面已移除', !document.querySelector('.icon-grid'));
-check('切完之后商店还开着', !!document.querySelector('.shop-list'));
+check('切完之后商店还开着', !!document.querySelector('.shop-grid'));
 
 // 卸载 / 重装
 await clickShop('消息');
@@ -98,15 +98,17 @@ search.value = '';
 search.dispatchEvent(new window.Event('input', { bubbles: true }));
 await sleep(200);
 
-// 难度分区
-[...document.querySelectorAll('.chip')].find((c) => c.textContent.startsWith('新手')).click();
+// 难度分区：应用 → 新手
+[...document.querySelectorAll('.nav-item')].find((c) => c.textContent.startsWith('应用')).click();
+await sleep(200);
+[...document.querySelectorAll('.nav-sub')].find((c) => c.textContent.startsWith('新手')).click();
 await sleep(200);
 const dots = [...document.querySelectorAll('.shop-card .dots')].map((el) => el.textContent);
 check('新手分区只留一星', dots.length > 0 && dots.every((d) => d === '●○○'),
   `${dots.length} 张，${[...new Set(dots)].join('/')}`);
 
 // 切回格栅
-[...document.querySelectorAll('.chip')].find((c) => c.textContent.startsWith('全部')).click();
+[...document.querySelectorAll('.nav-item')].find((c) => c.textContent.startsWith('全部')).click();
 await sleep(200);
 await clickShop('格栅桌面');
 check('能切回格栅桌面', !!document.querySelector('.icon-grid'));

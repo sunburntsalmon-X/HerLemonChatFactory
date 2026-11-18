@@ -1,8 +1,8 @@
 /**
  * 应用：商店
  *
- * 目录式布局：搜索 + 分区（新手/进阶/高级）+ 分组 + 封面卡片 + 详情页。
- * 所有颜色走主题变量，换主题时商店自己跟着变。
+ * 左边竖向目录（类型 → 难度，逐层展开），右边上图下文字的格子。
+ * 点格子进详情：封面、作者、日期、简介、教程、截图。
  */
 export default {
   id: 'app.store',
@@ -16,8 +16,8 @@ export default {
     const market = ctx.market;
 
     let query = '';
-    let level = 0;        // 0 全部 / 1 新手 / 2 进阶 / 3 高级
-    let detail = null;    // 正在看的条目
+    let cat = 'all';    // 当前类型
+    let sub = 0;        // 0 全部难度 / 1 新手 / 2 进阶 / 3 高级
 
     const search = h('input', {
       class: 'shop-search',
@@ -36,13 +36,12 @@ export default {
         h('div', { class: 'shop-hero-sub' }, '封面 · 详情 · 教程')),
       search,
     );
-    const chips = h('div', { class: 'row-chips shop-chips' });
-    head.append(chips);
 
-    const listView = h('div', { class: 'shop-list scroll' });
+    const nav = h('div', { class: 'shop-nav' });
+    const grid = h('div', { class: 'shop-grid scroll' });
+    const pane = h('div', { class: 'shop-pane' }, nav, grid);
     const detailView = h('div', { class: 'shop-detail scroll' });
-
-    body.replaceChildren(head, listView, detailView);
+    body.replaceChildren(head, pane, detailView);
     renderList();
 
     /* ---------------- 数据 ---------------- */
@@ -54,7 +53,6 @@ export default {
         kind: 'theme',
         difficulty: 1,
         icon: '◐',
-        // 用主题自己的两个颜色拼一块"封面"，一眼看出长什么样
         color: `linear-gradient(135deg, ${t.vars?.bg || '#222'} 0 50%, ${t.vars?.accent || '#888'} 50% 100%)`,
         installed: current === t.id,
         active: current === t.id,
@@ -84,47 +82,65 @@ export default {
       ].filter((g) => g.items.length);
     }
 
-    /* ---------------- 列表 ---------------- */
+    /* ---------------- 左边目录 ---------------- */
+
+    function renderNav(all) {
+      const total = all.reduce((n, g) => n + g.items.length, 0);
+      const nodes = [navItem('all', '全部', total)];
+
+      for (const g of all) {
+        const on = cat === g.kind;
+        nodes.push(navItem(g.kind, g.title, g.items.length));
+        if (!on) continue;
+        // 第二层：这个类型下的难度
+        for (const [id, label] of [[0, '全部'], [1, '新手'], [2, '进阶'], [3, '高级']]) {
+          const count = id ? g.items.filter((m) => (m.difficulty || 1) === id).length : g.items.length;
+          if (id && !count) continue;
+          nodes.push(h('button', {
+            class: `nav-sub${sub === id ? ' on' : ''}`,
+            onclick: () => { sub = id; renderList(); },
+          }, label, h('em', {}, count)));
+        }
+      }
+      nav.replaceChildren(...nodes);
+    }
+
+    function navItem(id, label, count) {
+      return h('button', {
+        class: `nav-item${cat === id ? ' on' : ''}`,
+        onclick: () => { cat = id; sub = 0; renderList(); },
+      }, label, h('em', {}, count));
+    }
+
+    /* ---------------- 右边格子 ---------------- */
 
     function renderList() {
-      detail = null;
       api.setBack(null);
       api.setSubtitle('');
       head.hidden = false;
+      pane.hidden = false;
       detailView.hidden = true;
-      listView.hidden = false;
 
       const all = groups();
-      chips.replaceChildren(
-        levelChip(0, '全部'),
-        levelChip(1, '新手'),
-        levelChip(2, '进阶'),
-        levelChip(3, '高级'),
-      );
+      renderNav(all);
 
+      // 搜索时跨类型找；否则只显示当前类型
+      const scope = query ? all : all.filter((g) => cat === 'all' || g.kind === cat);
       const nodes = [];
-      for (const group of all) {
+      for (const group of scope) {
         let items = group.items.filter(match);
-        if (level) items = items.filter((m) => (m.difficulty || 1) === level);
-        // 全部：新手排前面，同级按名字
-        if (!level) {
+        if (sub) items = items.filter((m) => (m.difficulty || 1) === sub);
+        if (!items.length) continue;
+        if (!query) {
           items = [...items].sort((a, b) =>
             (a.difficulty || 1) - (b.difficulty || 1) || String(a.name).localeCompare(String(b.name), 'zh'));
         }
-        if (!items.length) continue;
         nodes.push(h('div', { class: 'group' },
           h('h2', {}, group.title, h('span', { class: 'count' }, items.length)),
-          items.map(card)));
+          h('div', { class: 'shop-cards' }, items.map(card))));
       }
 
-      listView.replaceChildren(...(nodes.length ? nodes : [empty()]));
-    }
-
-    function levelChip(id, label) {
-      return h('button', {
-        class: `chip${level === id ? ' on' : ''}`,
-        onclick: () => { level = id; renderList(); },
-      }, label);
+      grid.replaceChildren(...(nodes.length ? nodes : [empty()]));
     }
 
     function match(item) {
@@ -135,7 +151,7 @@ export default {
     }
 
     function empty() {
-      return h('div', { class: 'empty-state' }, '没找到。换个词试试，或切回「全部」。');
+      return h('div', { class: 'empty-state' }, '没找到。换个词试试，或点左边的「全部」。');
     }
 
     function card(item) {
@@ -143,20 +159,16 @@ export default {
       return h('div', {
         class: 'shop-card',
         onclick: (event) => {
-          if (event.target.closest('.pill')) return;   // 点按钮不跳详情
+          if (event.target.closest('.pill')) return;
           openDetail(item);
         },
       },
         cover(item),
-        h('div', { class: 'shop-card-main' },
-          h('div', { class: 'shop-card-top' },
-            h('span', { class: 'name' }, item.name,
-              item.version ? h('span', { class: 'ver' }, ` v${item.version}`) : null),
-            h('span', { class: 'dots' }, dots(item.difficulty))),
-          h('div', { class: 'shop-card-meta' }, metaLine(item)),
-          h('div', { class: 'shop-card-desc' }, item.summary || item.id)),
+        h('div', { class: 'shop-card-body' },
+          h('div', { class: 'shop-card-name' }, item.name),
+          h('div', { class: 'shop-card-meta' }, item.author || '官方', ' · ', dots(item.difficulty))),
         h('button', {
-          class: `pill${act.on ? ' on' : ''}`,
+          class: `pill${act.on ? ' on' : ''} card-pill`,
           disabled: !act.run,
           onclick: act.run,
         }, act.label),
@@ -164,12 +176,7 @@ export default {
     }
 
     function dots(n = 1) {
-      return '●'.repeat(n) + '○'.repeat(Math.max(0, 3 - n));
-    }
-
-    function metaLine(item) {
-      const author = item.author || '官方';
-      return item.updated ? `${author} · 更新于 ${item.updated}` : author;
+      return h('span', { class: 'dots' }, '●'.repeat(n) + '○'.repeat(Math.max(0, 3 - n)));
     }
 
     function cover(item, big = false) {
@@ -186,9 +193,8 @@ export default {
     /* ---------------- 详情 ---------------- */
 
     function openDetail(item) {
-      detail = item;
       head.hidden = true;
-      listView.hidden = true;
+      pane.hidden = true;
       detailView.hidden = false;
       api.setSubtitle(item.name);
       api.setBack(() => renderList(), '‹ 商店');
@@ -205,7 +211,9 @@ export default {
         h('div', { class: 'shop-detail-head' },
           h('h1', {}, item.name,
             item.version ? h('span', { class: 'ver' }, ` v${item.version}`) : null),
-          h('div', { class: 'shop-card-meta' }, metaLine(item), ' · 难度 ', dots(item.difficulty))),
+          h('div', { class: 'shop-card-meta' },
+            item.author || '官方',
+            item.updated ? ` · 更新于 ${item.updated}` : '', ' · 难度 ', dots(item.difficulty))),
         h('button', {
           class: `btn${act.on ? '' : ' primary'}`,
           disabled: !act.run,
@@ -265,7 +273,7 @@ export default {
 
     async function applyTheme(id) {
       await market.setTheme(id);
-      await ctx.settings.set('theme.accent', null); // 主题自带的颜色优先
+      await ctx.settings.set('theme.accent', null);
       ctx.applyTheme();
       renderList();
     }
