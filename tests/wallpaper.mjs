@@ -41,7 +41,7 @@ const names = () => [...document.querySelectorAll('.appicon small')].map((e) => 
 const layer = () => document.querySelector('#bg-layer');
 const iconOf = (n) => [...document.querySelectorAll('.appicon')]
   .find((e) => e.querySelector('small')?.textContent === n);
-const shopPill = (n) => [...document.querySelectorAll('.shop-item')]
+const shopPill = (n) => [...document.querySelectorAll('.shop-card')]
   .find((el) => el.querySelector('.name')?.textContent?.startsWith(n))?.querySelector('.pill');
 const closeApp = async () => {
   const back = document.querySelector('.btn-back');

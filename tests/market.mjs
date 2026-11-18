@@ -40,7 +40,7 @@ const check = (name, cond, extra = '') => {
 
 const iconByName = (name) => [...document.querySelectorAll('.appicon')]
   .find((el) => el.querySelector('small')?.textContent === name);
-const shopItem = (name) => [...document.querySelectorAll('.shop-item')]
+const shopItem = (name) => [...document.querySelectorAll('.shop-card')]
   .find((el) => el.querySelector('.name')?.textContent?.startsWith(name));
 const clickShop = async (name) => {
   const item = shopItem(name);
@@ -60,7 +60,7 @@ check('商店打开', !!document.querySelector('.shop-list'));
 check('有搜索框', !!document.querySelector('.shop-search'));
 check('有分类筛选', document.querySelectorAll('.chip').length >= 4,
   `${document.querySelectorAll('.chip').length} 个分类`);
-const cards = document.querySelectorAll('.shop-item').length;
+const cards = document.querySelectorAll('.shop-card').length;
 check('货架上有商品', cards >= 6, `${cards} 个`);
 
 // 换桌面
@@ -86,8 +86,8 @@ const search = document.querySelector('.shop-search');
 search.value = '侧边';
 search.dispatchEvent(new window.Event('input', { bubbles: true }));
 await sleep(200);
-check('搜索能过滤', document.querySelectorAll('.shop-item').length === 1,
-  `${document.querySelectorAll('.shop-item').length} 个结果`);
+check('搜索能过滤', document.querySelectorAll('.shop-card').length === 1,
+  `${document.querySelectorAll('.shop-card').length} 个结果`);
 
 search.value = '不存在的东西';
 search.dispatchEvent(new window.Event('input', { bubbles: true }));
@@ -98,12 +98,12 @@ search.value = '';
 search.dispatchEvent(new window.Event('input', { bubbles: true }));
 await sleep(200);
 
-// 分类切换
-const themeChip = [...document.querySelectorAll('.chip')].find((c) => c.textContent.startsWith('主题'));
-themeChip.click();
+// 难度分区
+[...document.querySelectorAll('.chip')].find((c) => c.textContent.startsWith('新手')).click();
 await sleep(200);
-check('分类筛选可用，只剩主题', document.querySelectorAll('.shop-item').length === 6,
-  `${document.querySelectorAll('.shop-item').length} 个主题`);
+const dots = [...document.querySelectorAll('.shop-card .dots')].map((el) => el.textContent);
+check('新手分区只留一星', dots.length > 0 && dots.every((d) => d === '●○○'),
+  `${dots.length} 张，${[...new Set(dots)].join('/')}`);
 
 // 切回格栅
 [...document.querySelectorAll('.chip')].find((c) => c.textContent.startsWith('全部')).click();

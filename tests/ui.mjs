@@ -59,7 +59,7 @@ const check = (name, cond, extra = '') => {
 
 const iconByName = (name) => [...document.querySelectorAll('.appicon')]
   .find((el) => el.querySelector('small')?.textContent === name);
-const cardOf = (name) => [...document.querySelectorAll('.shop-item')]
+const cardOf = (name) => [...document.querySelectorAll('.shop-card')]
   .find((el) => el.querySelector('.name')?.textContent?.startsWith(name));
 const pillOf = (name) => cardOf(name)?.querySelector('.pill');
 const back = async () => {

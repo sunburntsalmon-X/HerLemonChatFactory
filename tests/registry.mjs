@@ -71,7 +71,7 @@ await import(path.join(APP, 'core/boot.js'));
 await sleep(600);
 
 const names = () => [...document.querySelectorAll('.appicon small')].map((e) => e.textContent);
-const shopPill = (n) => [...document.querySelectorAll('.shop-item')]
+const shopPill = (n) => [...document.querySelectorAll('.shop-card')]
   .find((el) => el.querySelector('.name')?.textContent?.startsWith(n))?.querySelector('.pill');
 const clickIcon = (n) => [...document.querySelectorAll('.appicon')]
   .find((e) => e.querySelector('small')?.textContent === n)?.click();
