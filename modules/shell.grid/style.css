@@ -1,0 +1,50 @@
+/* 格栅桌面自己的样式：朴素方块，不跟别人共用底座 */
+
+.desktop {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--sp-5) var(--sp-4) calc(var(--sp-6) + var(--safe-b));
+}
+
+.icon-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 22px var(--sp-3);
+}
+
+.appicon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--fg);
+  transition: transform var(--dur) var(--ease);
+}
+.appicon:active { transform: scale(.94); }
+.appicon small {
+  max-width: 100%;
+  font-size: var(--fs-xs);
+  color: var(--dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tile {
+  width: 100%;
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 24%;
+  font-size: 23px;
+  line-height: 1;
+  background: var(--tile-bg, var(--surface-2));
+  border: 1px solid var(--line);
+}
+
+@media (hover: hover) {
+  .appicon:hover .tile { border-color: color-mix(in srgb, var(--fg) 26%, transparent); }
+}

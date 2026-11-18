@@ -1,0 +1,12 @@
+{
+  "name": "xiaoshouji-tests",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node smoke.mjs && node swap.mjs && node market.mjs && node contacts.mjs && node memory.mjs && node wallpaper.mjs && node registry.mjs && node stale.mjs"
+  },
+  "devDependencies": {
+    "fake-indexeddb": "^6.0.0",
+    "jsdom": "^25.0.0"
+  }
+}

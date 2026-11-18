@@ -1,0 +1,77 @@
+/* 商店自己的样式。内核不认这些类名，删掉商店也不影响别人。 */
+
+.shop-head {
+  flex: none;
+  padding: 14px 16px 12px;
+  background: color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.shop-hero { padding: 2px 2px 14px; }
+.shop-hero-title { font-size: 22px; font-weight: 600; letter-spacing: -.01em; }
+.shop-hero-sub { color: var(--dim); font-size: 12px; margin-top: 4px; }
+
+.shop-search {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 14px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--fg);
+  font: inherit; font-size: 14px;
+  outline: none;
+  -webkit-appearance: none;
+}
+.shop-search:focus { border-color: var(--accent); }
+.shop-search::placeholder { color: var(--dim); }
+
+.shop-chips {
+  display: flex; gap: 8px;
+  margin-top: 12px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.shop-chips::-webkit-scrollbar { display: none; }
+
+
+.shop-list { padding: 16px 16px calc(30px + var(--safe-b)); }
+.shop-list .group h2 { display: flex; align-items: center; gap: 8px; }
+.count { color: var(--dim); font-size: 11px; font-weight: 400; }
+
+.shop-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; margin-bottom: 10px;
+  border: 1px solid var(--line); border-radius: 16px;
+  background: var(--surface);
+}
+.shop-item .tile {
+  width: 44px; height: 44px; flex: none;
+  border-radius: 13px; display: grid; place-items: center;
+  font-size: 20px; background: var(--surface-2); border: 1px solid var(--line);
+}
+.shop-item .info { flex: 1; min-width: 0; }
+.shop-item .name { font-size: 15px; }
+.shop-item .ver { color: var(--dim); font-size: 11px; }
+.shop-item .desc {
+  color: var(--dim); font-size: 12px; margin-top: 2px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+
+/* 主题卡：四格色板 */
+.swatches {
+  width: 44px; height: 44px; flex: none;
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-radius: 13px; overflow: hidden;
+  border: 1px solid var(--line);
+}
+.swatches span { display: block; }
+
+.pill {
+  flex: none; padding: 8px 15px; border-radius: 999px;
+  border: 1px solid var(--line); background: transparent;
+  color: var(--fg); font: inherit; font-size: 13px; cursor: pointer;
+}
+.pill.on { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
+.pill[disabled] { opacity: .45; cursor: default; }
+

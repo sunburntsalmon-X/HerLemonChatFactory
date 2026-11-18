@@ -1,0 +1,251 @@
+{
+  "schema": 2,
+  "name": "小手机商店",
+  "themes": [
+    {
+      "id": "ink",
+      "name": "墨黑",
+      "summary": "低饱和深色，夜里不刺眼",
+      "vars": {
+        "bg": "#0d0f13",
+        "surface": "#15181e",
+        "surface2": "#1c2027",
+        "line": "#272c36",
+        "fg": "#e6e9f0",
+        "dim": "#8b93a3",
+        "accent": "#9db8d2",
+        "danger": "#e08a8a"
+      },
+      "wallpaper": "radial-gradient(120% 80% at 100% 0%, #1a2130 0%, transparent 55%)"
+    },
+    {
+      "id": "paper",
+      "name": "米白",
+      "summary": "纸感浅色，白天用眼睛舒服",
+      "vars": {
+        "bg": "#f6f4ef",
+        "surface": "#ffffff",
+        "surface2": "#eeebe4",
+        "line": "#ddd7cc",
+        "fg": "#24221e",
+        "dim": "#7b756b",
+        "accent": "#a9663f",
+        "danger": "#b3443c"
+      },
+      "wallpaper": "radial-gradient(120% 80% at 100% 0%, #fbf1e3 0%, transparent 60%)"
+    },
+    {
+      "id": "moss",
+      "name": "苔绿",
+      "summary": "林间的灰绿，安静",
+      "vars": {
+        "bg": "#0f1412",
+        "surface": "#161c18",
+        "surface2": "#1e2621",
+        "line": "#2a352e",
+        "fg": "#e5ebe6",
+        "dim": "#8b9a90",
+        "accent": "#8cc9a0",
+        "danger": "#d98b84"
+      },
+      "wallpaper": "radial-gradient(120% 80% at 0% 0%, #17281e 0%, transparent 55%)"
+    },
+    {
+      "id": "plum",
+      "name": "暮紫",
+      "summary": "入夜后的紫，偏柔",
+      "vars": {
+        "bg": "#121019",
+        "surface": "#1a1723",
+        "surface2": "#221e2d",
+        "line": "#2f2939",
+        "fg": "#eae6f2",
+        "dim": "#948da6",
+        "accent": "#b9a2e0",
+        "danger": "#d98d9e"
+      },
+      "wallpaper": "radial-gradient(120% 80% at 100% 0%, #241a33 0%, transparent 55%)"
+    },
+    {
+      "id": "sand",
+      "name": "沙",
+      "summary": "暖调浅色，像旧纸",
+      "vars": {
+        "bg": "#f5f0e7",
+        "surface": "#fffdf8",
+        "surface2": "#ece4d6",
+        "line": "#dcd2c0",
+        "fg": "#2a2620",
+        "dim": "#7d7365",
+        "accent": "#b07d3f",
+        "danger": "#a8463b"
+      },
+      "wallpaper": "radial-gradient(120% 80% at 0% 0%, #fdf6e8 0%, transparent 60%)"
+    },
+    {
+      "id": "neon",
+      "name": "霓虹",
+      "summary": "高对比的薄荷绿，最早那套",
+      "vars": {
+        "bg": "#0a0c12",
+        "surface": "#141821",
+        "surface2": "#1b212d",
+        "line": "#262d3b",
+        "fg": "#e9eef8",
+        "dim": "#8b96ab",
+        "accent": "#5eead4",
+        "danger": "#f87171"
+      },
+      "wallpaper": "radial-gradient(120% 80% at 100% 0%, #1d2b4d 0%, transparent 55%), radial-gradient(90% 60% at -10% 100%, #12333a 0%, transparent 55%)"
+    }
+  ],
+  "modules": [
+    {
+      "id": "shell.grid",
+      "kind": "shell",
+      "name": "格栅桌面",
+      "version": "0.1.0",
+      "icon": "▦",
+      "summary": "像真手机一样的图标网格",
+      "tags": [
+        "桌面",
+        "基础"
+      ]
+    },
+    {
+      "id": "shell.asael",
+      "kind": "shell",
+      "name": "Asael 桌面",
+      "version": "0.1.0",
+      "icon": "◈",
+      "summary": "玻璃质感图标 + 底部 Dock，照 Asael 的手机桌面做的",
+      "tags": [
+        "桌面",
+        "玻璃",
+        "美化"
+      ]
+    },
+    {
+      "id": "shell.sidebar",
+      "kind": "shell",
+      "name": "侧边栏",
+      "version": "0.1.0",
+      "icon": "▤",
+      "summary": "左边一列应用，右边内容",
+      "tags": [
+        "桌面",
+        "效率"
+      ]
+    },
+    {
+      "id": "app.chat",
+      "kind": "app",
+      "name": "消息",
+      "version": "0.1.0",
+      "icon": "💬",
+      "summary": "和人物聊天，记录存在本机",
+      "tags": [
+        "聊天",
+        "基础"
+      ]
+    },
+    {
+      "id": "app.contacts",
+      "kind": "app",
+      "name": "通讯录",
+      "version": "0.1.0",
+      "icon": "👤",
+      "summary": "新建、修改、删除人物和人设",
+      "tags": [
+        "角色",
+        "人设",
+        "基础"
+      ]
+    },
+    {
+      "id": "app.settings",
+      "kind": "app",
+      "name": "设置",
+      "version": "0.1.0",
+      "icon": "⚙",
+      "summary": "模型、外观、备份导出",
+      "tags": [
+        "系统",
+        "基础"
+      ]
+    },
+    {
+      "id": "app.store",
+      "kind": "app",
+      "name": "商店",
+      "version": "0.1.0",
+      "icon": "🛍",
+      "summary": "装应用、换桌面、换主题",
+      "tags": [
+        "系统",
+        "基础"
+      ]
+    },
+    {
+      "id": "runtime.chat",
+      "kind": "runtime",
+      "name": "普通陪聊",
+      "version": "0.1.0",
+      "icon": "◍",
+      "summary": "由人物的 runtime 字段决定，不在商店里开关",
+      "tags": [
+        "角色",
+        "脑子"
+      ]
+    },
+    {
+      "id": "memory.simple",
+      "kind": "feature",
+      "name": "简单记忆",
+      "version": "0.1.0",
+      "icon": "🧠",
+      "summary": "每几轮自动记一笔，聊天时带进上下文",
+      "tags": [
+        "记忆",
+        "增强"
+      ]
+    },
+    {
+      "id": "fx.bg.theme",
+      "kind": "app",
+      "name": "主题色背景",
+      "version": "0.1.0",
+      "icon": "◐",
+      "summary": "纯色、渐变、光晕、方格、点阵，跟着主题色走（装完桌面多一个图标）",
+      "tags": [
+        "背景",
+        "美化"
+      ]
+    },
+    {
+      "id": "fx.bg.image",
+      "kind": "app",
+      "name": "图片背景",
+      "version": "0.1.0",
+      "icon": "🖼",
+      "summary": "上传照片，调滤镜、模糊、透明度（装完桌面多一个图标）",
+      "tags": [
+        "背景",
+        "美化"
+      ]
+    },
+    {
+      "id": "fx.bg.css",
+      "kind": "app",
+      "name": "自定义背景",
+      "version": "0.1.0",
+      "icon": "⌘",
+      "summary": "自己写几行 CSS，模板里带主题色变量（装完桌面多一个图标）",
+      "tags": [
+        "背景",
+        "美化",
+        "进阶"
+      ]
+    }
+  ]
+}
