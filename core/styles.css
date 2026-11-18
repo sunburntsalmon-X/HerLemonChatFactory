@@ -9,7 +9,7 @@
   --sp-4: 16px; --sp-5: 24px; --sp-6: 32px;
 
   /* 字号 */
-  --fs-xs: 11px; --fs-sm: 12px; --fs-md: 13px;
+  --fs-xs: 11px; --fs-sm: 12px; --fs-md: 13px; --fs-label: 14px;
   --fs: 15px;    --fs-lg: 17px; --fs-xl: 22px;
 
   /* 圆角 */
@@ -280,20 +280,23 @@ button { cursor: pointer; }
 .composer textarea:focus { border-color: var(--accent); }
 .composer textarea::placeholder { color: var(--dim); }
 
+/* 控件基线：按 M3 小号按钮的度量（高 40 / 全圆角 / 左右 16 / 标签 14-500）。
+   简洁是底线，不是"能看就行"——状态层、禁用、焦点环要成套。 */
 .btn-send {
   flex: none;
   height: 40px;
-  padding: 0 var(--sp-4);
+  padding: 0 18px;
   border: 0;
   border-radius: 20px;
   background: var(--accent);
   color: var(--accent-ink);
-  font-size: var(--fs);
-  font-weight: 600;
+  font-size: var(--fs-label);
+  font-weight: 500;
+  letter-spacing: .01em;
   transition: opacity var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
 .btn-send:active { transform: scale(.96); }
-.btn-send[disabled] { opacity: .4; }
+.btn-send[disabled] { opacity: .38; }
 
 /* ==========================================================================
    表单 / 设置
@@ -358,25 +361,32 @@ button { cursor: pointer; }
 .field.col textarea:focus { border-color: var(--accent); }
 
 .btn {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
   width: 100%;
+  min-height: 40px;
   margin-top: var(--sp-2);
-  padding: 12px var(--sp-4);
-  border: 1px solid var(--line);
-  border-radius: var(--r-md);
-  background: var(--surface);
+  padding: 0 var(--sp-4);
+  border: 0;
+  border-radius: var(--r-lg);
+  background: var(--surface-2);
   color: var(--fg);
-  font-size: var(--fs-md);
+  font-size: var(--fs-label);
+  font-weight: 500;
+  line-height: 1.2;
   transition: background-color var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
-.btn:active { transform: scale(.99); background: var(--surface-2); }
-.btn.primary {
-  border-color: transparent;
-  background: var(--accent);
-  color: var(--accent-ink);
-  font-weight: 600;
+.btn:active {
+  transform: scale(.99);
+  background: color-mix(in srgb, var(--fg) 10%, var(--surface-2));
 }
-.btn.danger { color: var(--danger); }
+.btn[disabled] { opacity: .38; }
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.primary:active { background: color-mix(in srgb, var(--fg) 14%, var(--accent)); }
+.btn.danger { background: transparent; color: var(--danger); }
+.btn.danger:active { background: color-mix(in srgb, var(--danger) 12%, transparent); }
 
 .prompt-dump {
   margin-top: var(--sp-2);
@@ -405,12 +415,45 @@ button { cursor: pointer; }
   background: transparent;
   border: 1px solid var(--line);
   color: var(--dim);
-  font: inherit; font-size: 13px;
+  font: inherit; font-size: var(--fs-md);
   cursor: pointer;
 }
-.chip em { font-style: normal; font-size: 11px; opacity: .65; }
+.chip em { font-style: normal; font-size: var(--fs-xs); opacity: .65; }
 .chip.on { background: var(--accent); border-color: transparent; color: var(--accent-ink); }
 .chip.on em { opacity: .8; }
+
+.pill {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--fg);
+  font-size: var(--fs-md);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background-color var(--dur) var(--ease),
+              border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease);
+}
+.pill:active { background: var(--surface-2); }
+.pill.on { background: var(--accent); border-color: transparent; color: var(--accent-ink); }
+.pill.on:active { background: color-mix(in srgb, var(--fg) 12%, var(--accent)); }
+.pill[disabled] { opacity: .38; }
+
+/* 键盘用户：有一圈清楚的焦点环；手指点不出现，不影响观感 */
+.btn:focus-visible,
+.btn-send:focus-visible,
+.pill:focus-visible,
+.chip:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 .row-chips {
   display: flex;
   flex-wrap: wrap;

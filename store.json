@@ -187,6 +187,19 @@
       ]
     },
     {
+      "id": "ui.button",
+      "kind": "ui",
+      "name": "线框按钮",
+      "version": "0.1.0",
+      "icon": "▢",
+      "summary": "按钮全部换成描边风；内核基线是实心，随时能换回来",
+      "tags": [
+        "界面",
+        "按钮",
+        "皮肤"
+      ]
+    },
+    {
       "id": "runtime.chat",
       "kind": "runtime",
       "name": "普通陪聊",

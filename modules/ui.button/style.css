@@ -1,0 +1,42 @@
+/**
+ * 皮肤：线框按钮
+ *
+ * 内核基线是实心的；这层把 .btn / .btn-send / .pill 全换成描边。
+ * 只覆盖，不新增类名——应用自己的 css 排在最后，仍然盖得住。
+ * 边框用长写法：宽度和颜色分开，换主题/被覆盖时更好排查。
+ */
+
+.btn {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--line);
+  background: transparent;
+  color: var(--fg);
+}
+.btn:active { background: color-mix(in srgb, var(--fg) 8%, transparent); }
+.btn.primary {
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+.btn.primary:active { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.btn.danger {
+  border-color: color-mix(in srgb, var(--danger) 40%, transparent);
+  color: var(--danger);
+}
+
+.btn-send {
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+}
+.btn-send:active { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+
+.pill { border-color: var(--line); }
+.pill.on {
+  border-color: var(--accent);
+  background: transparent;
+  color: var(--accent);
+}

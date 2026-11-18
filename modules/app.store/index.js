@@ -56,9 +56,25 @@ export default {
         active: current === t.id,
       }));
 
+      // 皮肤是单选，得给一个"退回内核基线"的选项，否则挑了就回不去
+      const skin = market.ui()[0] || null;
+      const uiItems = [
+        {
+          id: 'core.baseline',
+          kind: 'ui',
+          name: '内置（默认）',
+          icon: '◻',
+          summary: '内核自带的基线样式：实心按钮，永远可用',
+          installed: !skin,
+          active: !skin,
+        },
+        ...market.list('ui'),
+      ];
+
       return [
         { kind: 'shell', title: '桌面', items: market.list('shell') },
         { kind: 'app', title: '应用', items: market.list('app') },
+        { kind: 'ui', title: '界面', items: uiItems },
         { kind: 'feature', title: '功能', items: market.list('feature') },
         { kind: 'wallpaper', title: '背景', items: market.list('wallpaper') },
         { kind: 'theme', title: '主题色', items: themes },
@@ -131,10 +147,14 @@ export default {
         action = () => apply('shell', item.id);
       } else if (isRuntime) {
         label = '由人物决定';
+      } else if (item.kind === 'ui') {
+        on = item.active;
+        label = on ? '使用中' : '使用';
+        action = () => apply('ui', item.id === 'core.baseline' ? null : item.id);
       } else if (item.kind === 'feature') {
         on = item.installed;
         label = on ? '卸下' : '装上';
-        action = () => apply(on ? 'uninstallFeature' : 'installFeature', item.id);
+        action = () => apply(on ? 'uninstall' : 'install', item.id, item.kind);
       } else if (isStore) {
         on = true;
         label = '已装';
@@ -184,18 +204,21 @@ export default {
       renderBody();
     }
 
-    async function apply(action, id) {
+    async function apply(action, id, kind = 'app') {
       try {
         if (action === 'shell') await market.setShell(id);
         else if (action === 'wallpaper') await market.setWallpaper(id);
-        else if (action === 'install') await market.install(id, 'app');
-        else if (action === 'uninstall') await market.uninstall(id, 'app');
-        else if (action === 'installFeature') await market.install(id, 'feature');
-        else await market.uninstall(id, 'feature');
+        else if (action === 'ui') await market.setUi(id);
+        else if (action === 'install') await market.install(id, kind);
+        else await market.uninstall(id, kind);
 
         await ctx.reboot('app.store');
-        const verb = { shell: '桌面换好了', install: '装好了', uninstall: '卸掉了',
-          installFeature: '功能开了', uninstallFeature: '功能关了' }[action];
+        const verb = {
+          shell: '桌面换好了',
+          ui: '界面换好了',
+          install: '装好了',
+          uninstall: '卸掉了',
+        }[action];
         ctx.ui.toast(verb);
       } catch (err) {
         console.error('[app.store]', err);

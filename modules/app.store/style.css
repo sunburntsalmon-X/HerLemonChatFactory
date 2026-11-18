@@ -67,11 +67,3 @@
 }
 .swatches span { display: block; }
 
-.pill {
-  flex: none; padding: 8px 15px; border-radius: 999px;
-  border: 1px solid var(--line); background: transparent;
-  color: var(--fg); font: inherit; font-size: 13px; cursor: pointer;
-}
-.pill.on { background: var(--accent); color: var(--accent-ink); border-color: transparent; }
-.pill[disabled] { opacity: .45; cursor: default; }
-

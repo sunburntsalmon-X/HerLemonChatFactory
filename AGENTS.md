@@ -1,6 +1,7 @@
 # AGENTS.md — xiaoshouji（代码内规矩）
 
 > 产品视角看 [docs/产品说明.md](docs/产品说明.md)，内核边界看 [docs/内核边界.md](docs/内核边界.md)。
+> 项目背景、22 条已定决策、路线图看 [../framework/项目总纲.md](../framework/项目总纲.md)。
 > 改代码前先读本文件。
 
 ## 跑
@@ -26,8 +27,9 @@ cd tests && npm test
 - `wallpaper.mjs`：装完桌面多图标 → 点开是编辑器 → 换模板落盘 → 换另一款只留一层
 - `registry.mjs`：老快照不挡住新增 App → 卸载生效 → 卸载后新增 App 仍在
 - `stale.mjs`：本机名单里留着不存在的模块 → 照常启动 → 自动摘掉
+- `ui.mjs`：不装任何东西按钮就是好的（内核基线）→ 商城「界面」切到「线框按钮」→ 发送键当场变描边 → 换回「内置」恢复
 
-改完内核或加模块，**这八条必须还是全绿**。红了先修，别加新功能。
+改完内核或加模块，**这九条必须还是全绿**。红了先修，别加新功能。
 
 ## 硬规矩
 
@@ -36,8 +38,9 @@ cd tests && npm test
 2. 模块声明 `api: '1.x'`，不符 `boot.js` 会拒绝加载。
 3. 数据只写自己的命名空间：`ctx.vault.namespace('app.xxx')`。
 4. 模块必须有 `destroy()`，把定时器、监听、DOM 都清掉。
-5. **模块自带样式**：写 `css: 'style.css'` 并放进模块目录。`core/styles.css` 只放通用件，
-   不许再把 `.shop-*` 这种模块专属类名塞进内核。
+5. **模块自带样式**：写 `css: 'style.css'` 并放进模块目录。`core/styles.css` 放控件基线
+   （每个控件一份，简洁但不能丑）；皮肤模块只准覆盖这些类名，不许另起一套。
+   模块专属的 `.shop-*` 这类，永远不进内核。
 6. 颜色不许写死，一律走 CSS 变量（`--accent` `--surface` `--line` `--fg` `--dim` 等，`tokens.js` 注入）。
    商店自己也是这么写的——所以换主题时它跟着变，这是"全局生效"的验收方式。
 
@@ -50,7 +53,7 @@ modules/<id>/index.js
 ```js
 export default {
   id: '<id>',
-  kind: 'app',            // shell | app | runtime | feature | theme | pack
+  kind: 'app',            // shell | app | runtime | feature | ui | theme | pack
   api: '1.x',
   meta: { name: '名字', icon: '▦', color: '#334455' },
   css: 'style.css',       // 可选：自带样式，内核只插一次 <link>
@@ -63,6 +66,7 @@ export default {
 - 应用 → `apps` 数组
 - 外壳 → `shell` 字段
 - 角色脑子 → 人物的 `runtime` 字段（会在启动时自动装载）
+- 界面皮肤（只有样式）→ **不进 `app.json`**，在商城「界面」里单选；不选就是内核基线
 
 `feature` 类模块不画桌面，但可以 `ctx.host.registerApp({...})` 自带一个 App
 （`memory.simple` 就是这么带出「记忆」页的）。功能模块在 `app.json` 的 `features` 数组里登记。
@@ -80,7 +84,7 @@ store.json ──读──> market ──写──> vault[core/market]
 
 - 商城**不改 `app.json`、不下载、不安装**，只记"用户选了什么"
 - 点一下 → `ctx.reboot('app.store')` → 原地重装，**不刷新页面**，商店自己还开着
-- 重装顺序：销毁外壳 → 清 stage 上模块留下的节点 → `host.reset()` → `apps.clear()` → `prompt.reset()` → 角色脑子 → 应用 → 功能 → 外壳
+- 重装顺序：销毁外壳 → 清 stage 上模块留下的节点 → `host.reset()` → `apps.clear()` → `prompt.reset()` → UI → 角色脑子 → 应用 → 功能 → 外壳
 - 想回到 `app.json` 的初始状态：设置里"清空本机数据"，或 `market.reset()`
 
 ## 主题
@@ -96,7 +100,8 @@ store.json ──读──> market ──写──> vault[core/market]
 
 ## 改内核时注意
 
-- `boot.js` 里模块装载顺序：**角色脑子 → 应用 → 功能(feature) → 外壳**。功能自带的 App 靠这个顺序排在配置应用后面。
+- `boot.js` 里模块装载顺序：**UI → 角色脑子 → 应用 → 功能(feature) → 外壳**。
+  UI 排最前，它的样式表才在应用 css 前面，应用能盖掉它（D19）。功能自带的 App 靠这个顺序排在配置应用后面。
 - **App 只能通过 `ctx.apps.register()` 进桌面**，外壳订阅 `apps:changed` 自己重画。别再往 `mount` 里塞数组——快照式的，后加的 App 永远不显示。
 - 任何"重装"路径都必须先 `ctx.prompt.reset()`，否则人设会被拼两遍；`prompt` 的贡献者是数组，不是 Map。
 - `host.reset()` 会清掉应用注册表，重装前必须调，否则旧应用还挂在里面。
@@ -125,13 +130,16 @@ store.json ──读──> market ──写──> vault[core/market]
 
 ## 内核红线
 
-`core/` 的 JS 控制在 **1500 行**以内（现在 1222）。加功能前先问：能不能做成模块？
+`core/` 的 JS 控制在 **1500 行**以内（现在 1253）。加功能前先问：能不能做成模块？
 只有"所有模块都要用"的才进内核。CSS 同理，模块专属样式放模块里。
 
 ## 铁律
 
 **模块装完必须在桌面可见。** 槽位、后台挂载这类"看不见的生效"一律不做——
 背景模块返工三次就是踩在这个上。
+
+例外只有 `kind: 'ui'` 的皮肤：它没有图标，但永远在商城「界面」里，随时能换回「内置（默认）」。
+验收看"切到它按钮当场变样、换回内置立刻恢复"——它不是后台挂载，是一层可替换的样式。
 
 ## 已知待办
 

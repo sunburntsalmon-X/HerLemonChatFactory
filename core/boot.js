@@ -104,6 +104,18 @@ async function assemble() {
   ctx.apps.clear();
   ctx.prompt.reset();
 
+  // UI 模块只有样式。先装它，样式表就排在应用 css 前面——应用自带 css 才能盖掉它（D19）
+  for (const id of ctx.market.ui()) {
+    try {
+      const mod = await loadModule(id);
+      await mod.setup?.(ctx);
+    } catch (err) {
+      console.error(`[boot] UI 模块 ${id} 装载失败`, err);
+      await ctx.market.forget(id, 'ui');
+      toast(`${id} 已经用不了了，已从名单里移除`);
+    }
+  }
+
   // 角色"脑子"：由人物的 runtime 字段决定，用到才加载
   const runtimes = new Set(ctx.people.list().map((c) => c.runtime || 'runtime.chat'));
   for (const id of runtimes) {
@@ -143,12 +155,19 @@ async function assemble() {
 
   const apps = ctx.apps;
 
-  // 外壳：先把其他外壳留下的样式表摘掉，否则规则会叠在一起
+  // 现在真正生效的有哪些模块；不在里面的样式表全摘掉。
+  // 换外壳残留（D20b）、卸掉的应用、卸掉的 UI 模块，都靠这一段收干净。
   const activeShell = ctx.market.shell();
-  const shellIds = new Set(ctx.market.list('shell').map((m) => m.id));
+  const live = new Set([
+    ...ctx.market.ui(),
+    ...runtimes,
+    ...ctx.market.apps(),
+    ...ctx.market.features(),
+    activeShell,
+  ]);
   for (const link of document.querySelectorAll('link[data-module^="module-css:"]')) {
     const id = link.dataset.module.slice('module-css:'.length);
-    if (shellIds.has(id) && id !== activeShell) link.remove();
+    if (!live.has(id)) link.remove();
   }
 
   try {
