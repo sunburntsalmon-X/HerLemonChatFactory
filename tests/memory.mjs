@@ -4,7 +4,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { JSDOM } from 'jsdom';
 import 'fake-indexeddb/auto';
 
@@ -30,7 +30,7 @@ globalThis.fetch = async (url) => {
   return { ok: true, status: 200, json: async () => JSON.parse(text), text: async () => text };
 };
 
-await import(path.join(APP, 'core/boot.js'));
+await import(pathToFileURL(path.join(APP, 'core/boot.js')).href);
 await sleep(600);
 
 const results = [];
@@ -63,7 +63,7 @@ await say('我最近在学吉他，手指好疼');
 await say('每天下班练半小时');
 await say('下个月想去听现场');
 
-const { createVault } = await import(path.join(APP, 'core/vault.js'));
+const { createVault } = await import(pathToFileURL(path.join(APP, 'core/vault.js')).href);
 const vault = await createVault();
 const items = await vault.namespace('memory.simple').get('items:ayan', []);
 check('聊够轮数后自动记了一笔', Array.isArray(items) && items.length === 1,

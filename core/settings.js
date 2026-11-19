@@ -13,7 +13,8 @@ export function createSettings({ defaults, vault, bus }) {
 
   async function load() {
     const saved = await store.get('settings', null);
-    if (saved && typeof saved === 'object') values = deepMerge(clone(defaults), saved);
+    // 旧版本把 apps/features/shell 也存进了快照；不采信这些键，否则 app.json 后来新增的项会被盖掉
+    if (saved && typeof saved === 'object') values = deepMerge(clone(defaults), persistable(saved));
     return values;
   }
 
@@ -41,9 +42,12 @@ export function createSettings({ defaults, vault, bus }) {
   return { get, set, load, reset, setKey, getKey, all: () => values };
 }
 
-/** characters 留在 app.json 里，不跟着设置一起存 */
+/**
+ * characters 留在 app.json 里，不跟着设置一起存。
+ * apps/features/shell 同样属于出厂清单与商城的选择，存快照会挡住 app.json 后来的新增项。
+ */
 function persistable(values) {
-  const { characters, ...rest } = values;
+  const { characters, apps, features, shell, ...rest } = values;
   return rest;
 }
 

@@ -6,7 +6,7 @@
  */
 import { readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { JSDOM } from 'jsdom';
 import 'fake-indexeddb/auto';
 
@@ -61,13 +61,13 @@ const check = (name, cond, extra = '') => {
 
 // 先模拟"老版本留下的整份列表快照"：只有原来的四个应用，没有后来新增的探针
 state.extraApp = true;
-const { createVault } = await import(path.join(APP, 'core/vault.js'));
+const { createVault } = await import(pathToFileURL(path.join(APP, 'core/vault.js')).href);
 const seed = await createVault();
 await seed.namespace('core').set('market', {
   apps: ['app.chat', 'app.store', 'app.settings', 'app.contacts'],
 });
 
-await import(path.join(APP, 'core/boot.js'));
+await import(pathToFileURL(path.join(APP, 'core/boot.js')).href);
 await sleep(600);
 
 const names = () => [...document.querySelectorAll('.appicon small')].map((e) => e.textContent);

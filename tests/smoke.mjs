@@ -4,7 +4,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { JSDOM } from 'jsdom';
 import 'fake-indexeddb/auto';
 
@@ -56,7 +56,7 @@ function check(name, cond, extra = '') {
 
 process.on('unhandledRejection', (err) => console.error('⚠️ 未捕获的 rejection:', err));
 
-await import(path.join(APP, 'core/boot.js'));
+await import(pathToFileURL(path.join(APP, 'core/boot.js')).href);
 
 await sleep(600);
 
@@ -119,7 +119,7 @@ if (dumpBtn) {
 }
 
 // 数据仓持久化
-const { createVault } = await import(path.join(APP, 'core/vault.js'));
+const { createVault } = await import(pathToFileURL(path.join(APP, 'core/vault.js')).href);
 const vault = await createVault();
 const ns = vault.namespace('app.chat');
 const conv = await ns.get('conv:ayan', null);

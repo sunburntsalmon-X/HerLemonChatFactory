@@ -1,14 +1,17 @@
 # AGENTS.md — xiaoshouji（代码内规矩）
 
 > 产品视角看 [docs/产品说明.md](docs/产品说明.md)，内核边界看 [docs/内核边界.md](docs/内核边界.md)。
-> 项目背景、22 条已定决策、路线图看 [../framework/项目总纲.md](../framework/项目总纲.md)。
+> 代码现状与完整说明看 [docs/wiki/README.md](docs/wiki/README.md)。
+> 原 `../framework/项目总纲.md` 不在本仓库；可执行的规矩以本文件和代码为准。
 > 改代码前先读本文件。
 
 ## 跑
 
+在仓库根目录执行：
+
 ```bash
-cd /root/workspace/xiaoshouji
-python3 -m http.server 8770     # 打开 http://127.0.0.1:8770/
+python3 -m http.server 8770     # 或 python -m http.server 8770；打开 http://127.0.0.1:8770/
+node scripts/dev-server.mjs     # 推荐：不缓存
 ```
 
 没有构建、没有打包、没有 npm 依赖（`tests/` 除外）。改完刷新就是最新。
@@ -21,15 +24,17 @@ cd tests && npm test
 
 - `smoke.mjs`：启动 → 桌面 → 列表 → 对话 → 流式回复 → 设置 → 提示词 → 落盘 → 导出
 - `swap.mjs`：只改 `app.json` 的 `shell` 字段，换外壳后聊天照常
-- `market.mjs`：商店里换桌面 / 装卸应用，不刷新页面，商店自身只读
+- `market.mjs`：商店里换桌面 / 装卸应用 / 换主题，不刷新页面，商店保持打开并跟着变色
 - `contacts.mjs`：新建人物 → 聊天列表出现 → 用新人设聊一句 → 删除 → 恢复默认 → 落盘
 - `memory.mjs`：聊够轮数自动记一笔 → 记忆 App 可见 → 进提示词 → 能删
 - `wallpaper.mjs`：装完桌面多图标 → 点开是编辑器 → 换模板落盘 → 换另一款只留一层
 - `registry.mjs`：老快照不挡住新增 App → 卸载生效 → 卸载后新增 App 仍在
 - `stale.mjs`：本机名单里留着不存在的模块 → 照常启动 → 自动摘掉
-- `ui.mjs`：不装任何东西按钮就是好的（内核基线）→ 商城「界面」切到「线框按钮」→ 发送键当场变描边 → 换回「内置」恢复
+- `ui.mjs`：不装任何东西按钮就是好的（内核基线）→ 商城「界面」切到「线框按钮」→ 发送键当场变描边 → 卸下后恢复基线
+- `shop.mjs`：商城卡片有封面/作者/难度 → 点开详情有封面、更新时间、详细介绍、使用教程 → 难度分区 → 搜索命中
+- `sheet.mjs`：内核底部弹窗 → 装「右往左」从右边出 → 再装「悬空」旧的自动卸下，同类互斥
 
-改完内核或加模块，**这九条必须还是全绿**。红了先修，别加新功能。
+改完内核或加模块，**这 11 条必须还是全绿**。红了先修，别加新功能。
 
 ## 硬规矩
 
@@ -37,7 +42,8 @@ cd tests && npm test
    这是"模块可以被 eject"的前提，破了这条整套设计就塌了。
 2. 模块声明 `api: '1.x'`，不符 `boot.js` 会拒绝加载。
 3. 数据只写自己的命名空间：`ctx.vault.namespace('app.xxx')`。
-4. 模块必须有 `destroy()`，把定时器、监听、DOM 都清掉。
+4. 带 `mount` 的模块必须返回 `destroy()`，把定时器、监听、DOM 都清掉。
+   （`feature` 目前没有统一的卸载回调，新增 feature 时请自行保存并在重装时清理监听。）
 5. **模块自带样式**：写 `css: 'style.css'` 并放进模块目录。`core/styles.css` 放控件基线
    （每个控件一份，简洁但不能丑）；皮肤模块只准覆盖这些类名，不许另起一套。
    模块专属的 `.shop-*` 这类，永远不进内核。
@@ -53,12 +59,12 @@ modules/<id>/index.js
 ```js
 export default {
   id: '<id>',
-  kind: 'app',            // shell | app | runtime | feature | ui | theme | pack
+  kind: 'app',            // shell | app | runtime | feature | ui
   api: '1.x',
   meta: { name: '名字', icon: '▦', color: '#334455' },
   css: 'style.css',       // 可选：自带样式，内核只插一次 <link>
   setup(ctx) {},          // 可选
-  mount(body, ctx, api) { return { destroy() {} }; },  // 只有 app 需要
+  mount(body, ctx, api) { return { destroy() {} }; },  // app 需要；shell 是 mount(stage, ctx, { apps })
 };
 ```
 
@@ -71,8 +77,9 @@ export default {
 `feature` 类模块不画桌面，但可以 `ctx.host.registerApp({...})` 自带一个 App
 （`memory.simple` 就是这么带出「记忆」页的）。功能模块在 `app.json` 的 `features` 数组里登记。
 
-**想让它在商店里出现**，还要往 `store.json` 的 `modules` 里加一条：
-`{ id, kind, name, version, icon, summary }`。商店只读这份清单，不读目录。
+**想让它在商店里出现**，还要往 `store.json` 的 `modules` 里加一条。至少要有
+`{ id, kind, name, version, icon, summary }`；封面、作者、难度、详细介绍、教程、截图等
+可选字段见 [docs/wiki/09-商城与清单.md](docs/wiki/09-商城与清单.md)。商店只读这份清单，不读目录。
 
 ## 商城是怎么运作的
 
@@ -90,7 +97,8 @@ store.json ──读──> market ──写──> vault[core/market]
 ## 主题
 
 - 主题是**数据**，写在 `store.json` 的 `themes` 数组里，没有模块目录
-- 每条主题：`{ id, name, summary, vars{bg,surface,surface2,line,fg,dim,accent,danger}, wallpaper }`
+- 每条主题：`{ id, name, summary, vars }`。`vars` 只给 `bg/fg/accent/deco` 也可以，
+  其余中性层由 `core/tokens.js` 推导；给全 9 色则优先使用。
 - 换主题**不重装**：`market.setTheme(id)` → `ctx.settings.set('theme.accent', null)` → `ctx.applyTheme()`
 - 设置里的"强调色"是覆盖项；挑主题会把它清掉，让主题自带的颜色回来
 - 新增主题只要往 `themes` 里加一条，商店自动出现（带四格色板）
@@ -130,7 +138,7 @@ store.json ──读──> market ──写──> vault[core/market]
 
 ## 内核红线
 
-`core/` 的 JS 控制在 **1500 行**以内（现在 1253）。加功能前先问：能不能做成模块？
+`core/` 的 JS 控制在 **1500 行**以内（当前约 1481 行，余量很小）。加功能前先问：能不能做成模块？
 只有"所有模块都要用"的才进内核。CSS 同理，模块专属样式放模块里。
 
 ## 铁律
@@ -138,8 +146,9 @@ store.json ──读──> market ──写──> vault[core/market]
 **模块装完必须在桌面可见。** 槽位、后台挂载这类"看不见的生效"一律不做——
 背景模块返工三次就是踩在这个上。
 
-例外只有 `kind: 'ui'` 的皮肤：它没有图标，但永远在商城「界面」里，随时能换回「内置（默认）」。
-验收看"切到它按钮当场变样、换回内置立刻恢复"——它不是后台挂载，是一层可替换的样式。
+例外只有 `kind: 'ui'` 的皮肤：它没有图标，但永远在商城「界面」里，卸下当前皮肤即回到内核基线
+（商城没有独立的「内置（默认）」条目）。
+验收看"切到它按钮当场变样、卸下后立刻恢复内核基线"——它不是后台挂载，是一层可替换的样式。
 
 ## 已知待办
 

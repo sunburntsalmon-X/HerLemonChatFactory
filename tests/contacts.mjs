@@ -3,7 +3,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { JSDOM } from 'jsdom';
 import 'fake-indexeddb/auto';
 
@@ -30,7 +30,7 @@ globalThis.fetch = async (url) => {
   return { ok: true, status: 200, json: async () => JSON.parse(text), text: async () => text };
 };
 
-await import(path.join(APP, 'core/boot.js'));
+await import(pathToFileURL(path.join(APP, 'core/boot.js')).href);
 await sleep(600);
 
 const results = [];
@@ -97,7 +97,7 @@ await sleep(400);
 check('删除后回到两个人', rows().length === 2, `${rows().length} 个`);
 
 // 落盘检查（删除之后、恢复默认之前）
-const { createVault } = await import(path.join(APP, 'core/vault.js'));
+const { createVault } = await import(pathToFileURL(path.join(APP, 'core/vault.js')).href);
 const vault = await createVault();
 const saved = await vault.namespace('core').get('characters', null);
 check('改动已写进数据仓', Array.isArray(saved) && saved.length === 2,

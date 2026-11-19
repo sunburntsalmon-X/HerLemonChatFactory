@@ -9,7 +9,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { JSDOM, ResourceLoader } from 'jsdom';
 import 'fake-indexeddb/auto';
 
@@ -20,9 +20,9 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 class LocalStyle extends ResourceLoader {
   async fetch(url) {
     const u = new URL(url);
-    // 模块的 css 是 file:// 绝对路径；index.html 里那类 ./core/... 是相对站点的
+    // 模块的 css 是 file:// URL；index.html 里那类 ./core/... 是相对站点的
     const file = u.protocol === 'file:'
-      ? decodeURIComponent(u.pathname)
+      ? fileURLToPath(u)
       : path.join(APP, decodeURIComponent(u.pathname));
     const text = await readFile(file, 'utf8');
     return Buffer.from(text);
@@ -79,7 +79,7 @@ const openStore = async () => {
   await sleep(400);
 };
 
-await import(path.join(APP, 'core/boot.js'));
+await import(pathToFileURL(path.join(APP, 'core/boot.js')).href);
 await sleep(700);
 await sleep(300);
 

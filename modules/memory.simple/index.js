@@ -11,6 +11,9 @@ const SUMMARY_PROMPT = `你是记忆整理员。读下面的对话，把值得�
 只记关于用户的事实、偏好、约定、正在做的事。不写寒暄，不写你自己的想法。
 如果确实没有值得记的，只回复两个字：无`;
 
+/** 上一次 setup 订阅的取消函数：reboot 会再执行 setup，不取消就会重复计数 */
+let offChat = null;
+
 export default {
   id: 'memory.simple',
   kind: 'feature',
@@ -18,6 +21,9 @@ export default {
   meta: { name: '简单记忆', icon: '🧠' },
 
   async setup(ctx) {
+    offChat?.();
+    offChat = null;
+
     const store = ctx.vault.namespace('memory.simple');
     const cache = new Map();   // 人物 id -> 记忆数组
     const turns = new Map();   // 人物 id -> 攒了几轮
@@ -57,7 +63,7 @@ export default {
 
     /* ---------- 聊完就记 ---------- */
 
-    ctx.bus.on('chat:replied', async ({ character, messages }) => {
+    offChat = ctx.bus.on('chat:replied', async ({ character, messages }) => {
       if (!character?.id) return;
       const count = (turns.get(character.id) || 0) + 1;
       turns.set(character.id, count);

@@ -3,7 +3,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { JSDOM, ResourceLoader } from 'jsdom';
 import 'fake-indexeddb/auto';
 
@@ -14,7 +14,7 @@ class LocalStyle extends ResourceLoader {
   async fetch(url) {
     const u = new URL(url);
     const file = u.protocol === 'file:'
-      ? decodeURIComponent(u.pathname)
+      ? fileURLToPath(u)
       : path.join(APP, decodeURIComponent(u.pathname));
     return Buffer.from(await readFile(file, 'utf8'));
   }
@@ -53,7 +53,7 @@ const navOf = (label) => [...document.querySelectorAll('.shop-nav .nav-item')]
 const subOf = (label) => [...document.querySelectorAll('.shop-nav .nav-sub')]
   .find((el) => el.textContent.startsWith(label));
 
-await import(path.join(APP, 'core/boot.js'));
+await import(pathToFileURL(path.join(APP, 'core/boot.js')).href);
 await sleep(700);
 await sleep(200);
 
