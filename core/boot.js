@@ -4,23 +4,29 @@
  * 顺序：读配置 → 建数据仓 → 装配模块 → 挂外壳。
  * 装配逻辑单独抽成 assemble()，商城切换后可以直接重装，不用刷新页面。
  */
-import { h, toast, clear, sleep } from './dom.js';
-import { sheet } from './sheet.js';
-import { createBus } from './bus.js';
-import { createVault } from './vault.js';
-import { createSettings } from './settings.js';
-import { createPrompt } from './prompt.js';
-import { createLLM } from './llm.js';
-import { createHost } from './host.js';
-import { createMarket } from './market.js';
-import { createAppRegistry } from './apps.js';
-import { createPeople } from './people.js';
-import { applyTheme } from './tokens.js';
-
 const root = document.getElementById('app');
 
 /** 改完前端资源就 +1：让浏览器一定拿新文件，别用旧的 JS/CSS */
-const VER = '4';
+const VER = '6';
+
+/*
+ * 内核自己的模块也走版本号（静态 import 带不了查询串）。
+ * 以前这些 import 不带版本，浏览器会把上一版 tokens.js 一直缓存着：
+ * 换主题时页面底变了，卡片/分隔线还是旧主题的颜色——"有些颜色根本没换"。
+ * 现在整条链跟 VER 一起换，刷新一次就是新代码。
+ */
+const { h, toast, clear, sleep } = await import(`./dom.js?v=${VER}`);
+const { sheet } = await import(`./sheet.js?v=${VER}`);
+const { createBus } = await import(`./bus.js?v=${VER}`);
+const { createVault } = await import(`./vault.js?v=${VER}`);
+const { createSettings } = await import(`./settings.js?v=${VER}`);
+const { createPrompt } = await import(`./prompt.js?v=${VER}`);
+const { createLLM } = await import(`./llm.js?v=${VER}`);
+const { createHost } = await import(`./host.js?v=${VER}`);
+const { createMarket } = await import(`./market.js?v=${VER}`);
+const { createAppRegistry } = await import(`./apps.js?v=${VER}`);
+const { createPeople } = await import(`./people.js?v=${VER}`);
+const { applyTheme } = await import(`./tokens.js?v=${VER}`);
 
 let ctx = null;
 let shellInstance = null;

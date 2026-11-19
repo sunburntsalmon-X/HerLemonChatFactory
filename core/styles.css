@@ -52,8 +52,7 @@
   /* 宽屏时手机外面那圈底色：跟着主题走，别写死 */
   --page-bg: color-mix(in srgb, var(--bg) 76%, #000);
 
-  /* 由主题色算出来的中间色，别的地方别重复算 */
-  --hairline: color-mix(in srgb, var(--line) 78%, transparent);
+  /* 交互覆盖色：只在按下/悬浮时用，不改主题本身 */
   --press: color-mix(in srgb, var(--fg) 6%, transparent);
   --press-strong: color-mix(in srgb, var(--fg) 11%, transparent);
 
@@ -71,11 +70,16 @@
   --line: #272c36;
   --fg: #e6e9f0;
   --dim: #8b93a3;
+  --surface-3: #23272f;
+  --line-soft: #20242b;
   --accent: #9db8d2;
   --accent-ink: #0b0e14;
   --accent-text: #9db8d2;
+  --accent-soft: #1d2530;
+  --accent-line: #3c4a5c;
   --deco: #9db8d2;
   --danger: #e08a8a;
+  --danger-soft: #2a1d1f;
   color-scheme: dark;
 }
 
@@ -201,7 +205,7 @@ img { display: block; max-width: 100%; }
   gap: var(--sp-1);
   min-height: 56px;
   padding: var(--sp-2) var(--sp-3);
-  border-bottom: 1px solid var(--hairline);
+  border-bottom: 1px solid var(--line-soft);
   background: var(--bg);
 }
 
@@ -291,7 +295,7 @@ img { display: block; max-width: 100%; }
   left: calc(var(--sp-4) + 46px + var(--sp-3));
   right: var(--sp-4);
   height: 1px;
-  background: var(--hairline);
+  background: var(--line-soft);
 }
 
 .chat-item:active { background: var(--press); }
@@ -303,7 +307,7 @@ img { display: block; max-width: 100%; }
   display: grid;
   place-items: center;
   overflow: hidden;
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--line-soft);
   border-radius: var(--r-pill);
   background: var(--surface-2);
   color: var(--fg);
@@ -372,7 +376,7 @@ img { display: block; max-width: 100%; }
 
 .bubble.ai {
   align-self: flex-start;
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--line-soft);
   border-bottom-left-radius: var(--r-xs);
   background: var(--surface-2);
   color: var(--fg);
@@ -405,7 +409,7 @@ img { display: block; max-width: 100%; }
   align-items: flex-end;
   gap: var(--sp-2);
   padding: var(--sp-2) var(--sp-3) calc(var(--sp-2) + var(--safe-b));
-  border-top: 1px solid var(--hairline);
+  border-top: 1px solid var(--line-soft);
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
@@ -501,7 +505,7 @@ img { display: block; max-width: 100%; }
 .field:first-of-type { border-radius: var(--r-md) var(--r-md) 0 0; }
 .field:last-of-type { border-radius: 0 0 var(--r-md) var(--r-md); }
 .field:only-of-type { border-radius: var(--r-md); }
-.field + .field { border-top: 1px solid var(--hairline); }
+.field + .field { border-top: 1px solid var(--line-soft); }
 
 .field label {
   flex: none;
@@ -601,7 +605,7 @@ img { display: block; max-width: 100%; }
 
 .btn:active {
   transform: scale(.985);
-  background: var(--press-strong);
+  background: var(--surface-3);
 }
 
 .btn[disabled] { opacity: .4; }
@@ -619,7 +623,7 @@ img { display: block; max-width: 100%; }
   color: var(--danger);
 }
 .btn.danger:active {
-  background: color-mix(in srgb, var(--danger) 12%, transparent);
+  background: var(--danger-soft);
 }
 
 /* ==========================================================================
@@ -650,9 +654,9 @@ img { display: block; max-width: 100%; }
 }
 
 .chip.on {
-  border-color: transparent;
-  background: var(--accent);
-  color: var(--accent-ink);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--fg);
 }
 .chip.on em { opacity: .8; }
 
@@ -679,12 +683,12 @@ img { display: block; max-width: 100%; }
 .pill:active { background: var(--press); }
 
 .pill.on {
-  border-color: transparent;
-  background: var(--accent);
-  color: var(--accent-ink);
+  border-color: var(--accent-line);
+  background: var(--accent-soft);
+  color: var(--fg);
 }
 .pill.on:active {
-  background: color-mix(in srgb, var(--fg) 12%, var(--accent));
+  background: color-mix(in srgb, var(--accent) 22%, var(--bg));
 }
 
 .pill[disabled] { opacity: .4; }
@@ -809,7 +813,7 @@ img { display: block; max-width: 100%; }
   padding: var(--sp-3);
   max-height: 240px;
   overflow: auto;
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--line-soft);
   border-radius: var(--r-sm);
   background: var(--surface-2);
   color: var(--dim);
@@ -838,7 +842,7 @@ img { display: block; max-width: 100%; }
 .bg-preview {
   height: 132px;
   margin-bottom: var(--sp-3);
-  border: 1px solid var(--hairline);
+  border: 1px solid var(--line-soft);
   border-radius: var(--r-md);
   background-position: center;
   background-size: cover;
