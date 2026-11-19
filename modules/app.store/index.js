@@ -53,7 +53,12 @@ export default {
         kind: 'theme',
         difficulty: 1,
         icon: '◐',
-        color: `linear-gradient(135deg, ${t.vars?.bg || '#222'} 0 50%, ${t.vars?.accent || '#888'} 50% 100%)`,
+        swatch: [
+          t.vars?.bg || '#222',
+          t.vars?.fg || '#eee',
+          t.vars?.accent || '#888',
+          t.vars?.deco || t.vars?.accent || '#888',
+        ],
         installed: current === t.id,
         active: current === t.id,
       }));
@@ -169,6 +174,10 @@ export default {
 
     function cover(item, big = false) {
       const cls = `shop-cover${big ? ' big' : ''}`;
+      if (item.swatch) {
+        return h('div', { class: `${cls} swatch` },
+          item.swatch.map((color) => h('span', { style: { background: color } })));
+      }
       if (item.cover) {
         return h('div', { class: cls }, h('img', { src: item.cover, alt: '', loading: 'lazy' }));
       }
