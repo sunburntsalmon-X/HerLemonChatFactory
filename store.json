@@ -245,20 +245,79 @@
       "difficulty": 1,
       "detail": "把按钮从内核基线的实心，换成 1px 描边的线框风。只覆盖 .btn / .btn-send / .pill 三类控件的样式，不新增类名，所以任何应用自带的 css 仍然盖得住它。",
       "tutorial": "打开商城 → 界面 → 线框按钮 → 使用。想回实心就点「内置（默认）」。装错不会坏，随时能换回来。",
-      "screenshots": []
+      "screenshots": [],
+      "category": "button"
     },
     {
-      "id": "ui.sheet",
+      "id": "ui.sheet.bottom",
       "kind": "ui",
-      "name": "弹窗",
+      "name": "弹窗 · 下往上",
       "version": "0.1.0",
       "icon": "▭",
+      "category": "sheet",
       "author": "官方",
       "updated": "2026-11-19",
       "difficulty": 1,
-      "summary": "弹窗四个方向：下往上、右往左、左往右、悬空",
-      "detail": "内核负责弹窗的机制（遮罩、Esc 关闭、点空白关闭），这个模块负责它从哪边出来、长什么样。方向在设置 → 弹窗里改，改完立刻生效。",
-      "tutorial": "装上它 → 设置 → 弹窗 → 选方向 → 回设置的「数据」里点「弹窗试一下」。",
+      "summary": "从底部升起的抽屉，最常用",
+      "detail": "换弹窗的出场方向和形状。同类只能装一个，装新的会自动换掉旧的；不装就是内核默认的底部抽屉。",
+      "tutorial": "装上它 → 设置 → 数据 → 弹窗试一下。",
+      "screenshots": [],
+      "tags": [
+        "界面",
+        "弹窗"
+      ]
+    },
+    {
+      "id": "ui.sheet.right",
+      "kind": "ui",
+      "name": "弹窗 · 右往左",
+      "version": "0.1.0",
+      "icon": "▭",
+      "category": "sheet",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "从右边滑出，占满高度",
+      "detail": "换弹窗的出场方向和形状。同类只能装一个，装新的会自动换掉旧的；不装就是内核默认的底部抽屉。",
+      "tutorial": "装上它 → 设置 → 数据 → 弹窗试一下。",
+      "screenshots": [],
+      "tags": [
+        "界面",
+        "弹窗"
+      ]
+    },
+    {
+      "id": "ui.sheet.left",
+      "kind": "ui",
+      "name": "弹窗 · 左往右",
+      "version": "0.1.0",
+      "icon": "▭",
+      "category": "sheet",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "从左边滑出，占满高度",
+      "detail": "换弹窗的出场方向和形状。同类只能装一个，装新的会自动换掉旧的；不装就是内核默认的底部抽屉。",
+      "tutorial": "装上它 → 设置 → 数据 → 弹窗试一下。",
+      "screenshots": [],
+      "tags": [
+        "界面",
+        "弹窗"
+      ]
+    },
+    {
+      "id": "ui.sheet.float",
+      "kind": "ui",
+      "name": "弹窗 · 悬空",
+      "version": "0.1.0",
+      "icon": "▭",
+      "category": "sheet",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "居中浮起的卡片",
+      "detail": "换弹窗的出场方向和形状。同类只能装一个，装新的会自动换掉旧的；不装就是内核默认的底部抽屉。",
+      "tutorial": "装上它 → 设置 → 数据 → 弹窗试一下。",
       "screenshots": [],
       "tags": [
         "界面",
@@ -317,7 +376,8 @@
       "difficulty": 1,
       "detail": "纯色、渐变、光晕、方格、点阵，跟着主题色走（装完桌面多一个图标）\n\n点「使用」或「安装」就生效，随时能换回来；不会改你的数据。",
       "tutorial": "打开商城 → 找到它 → 点右下角的按钮。",
-      "screenshots": []
+      "screenshots": [],
+      "category": "background"
     },
     {
       "id": "fx.bg.image",
@@ -335,7 +395,8 @@
       "difficulty": 2,
       "detail": "上传照片，调滤镜、模糊、透明度（装完桌面多一个图标）\n\n点「使用」或「安装」就生效，随时能换回来；不会改你的数据。",
       "tutorial": "打开商城 → 找到它 → 点右下角的按钮。",
-      "screenshots": []
+      "screenshots": [],
+      "category": "background"
     },
     {
       "id": "fx.bg.css",
@@ -354,7 +415,8 @@
       "difficulty": 3,
       "detail": "自己写几行 CSS，模板里带主题色变量（装完桌面多一个图标）\n\n点「使用」或「安装」就生效，随时能换回来；不会改你的数据。",
       "tutorial": "打开商城 → 找到它 → 点右下角的按钮。",
-      "screenshots": []
+      "screenshots": [],
+      "category": "background"
     }
   ]
 }

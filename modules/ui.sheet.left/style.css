@@ -1,0 +1,10 @@
+/* 左往右：占满高度，从右边缘滑入 */
+.sheet-mask { align-items: stretch; justify-content: flex-start; }
+.sheet {
+  width: min(86%, 360px); height: 100%; max-height: none;
+  padding-top: calc(var(--sp-5) + var(--safe-t, 0px));
+  border-radius: 0 20px 20px 0;
+  animation: sheet-in-left .22s var(--ease);
+}
+.sheet-handle { display: none; }
+@keyframes sheet-in-left { from { transform: translateX(-40px); opacity: 0; } }

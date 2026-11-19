@@ -1,0 +1,2 @@
+/* 下往上：内核基线就是这个方向，这里只调一下高度感和圆角 */
+.sheet { max-height: 82vh; border-radius: 24px 24px 0 0; }

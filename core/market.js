@@ -68,7 +68,24 @@ export function createMarket({ vault, config }) {
     const [addedKey, removedKey] = slots(kind);
     overrides[removedKey] = overrides[removedKey].filter((x) => x !== id);
     if (!overrides[addedKey].includes(id)) overrides[addedKey].push(id);
+
+    // 同类互斥（D23）：装新的，自动卸掉同 category 的旧模块
+    if (kind === 'ui') {
+      const cat = categoryOf(id);
+      if (cat) {
+        for (const other of ui()) {
+          if (other === id || categoryOf(other) !== cat) continue;
+          overrides.uiAdded = overrides.uiAdded.filter((x) => x !== other);
+          if (!overrides.uiRemoved.includes(other)) overrides.uiRemoved.push(other);
+        }
+      }
+    }
     await save();
+  }
+
+  /** 模块属于哪个互斥类目（store.json 的 category） */
+  function categoryOf(id) {
+    return (manifest.modules || []).find((m) => m.id === id)?.category || null;
   }
 
   async function uninstall(id, kind = 'app') {
@@ -133,7 +150,7 @@ export function createMarket({ vault, config }) {
     load, list,
     shell, apps, features, ui, setShell, wallpaper, setWallpaper, forget,
     themeId, themes, setTheme,
-    install, uninstall, reset,
+    install, uninstall, reset, categoryOf,
     manifest: () => manifest,
     raw: () => overrides,
   };

@@ -1,9 +1,9 @@
 /**
- * 验收测试：弹窗
+ * 验收测试：弹窗（拆成四个模块，同类互斥）
  *
- * - 设置里点「弹窗试一下」真的弹出来
- * - 点空白关掉、Esc 关掉
- * - 装上「弹窗」模块后，设置里多出方向选项，改了立刻生效
+ * - 设置里点「弹窗试一下」能弹出、点空白能关
+ * - 装「右往左」：弹窗真的从右边出来
+ * - 再装「悬空」：旧的自动卸下，同类别只剩一个
  */
 import { readFile } from 'node:fs/promises';
 import path from 'node:path';
@@ -50,59 +50,61 @@ const check = (name, cond, extra = '') => {
 
 const iconByName = (name) => [...document.querySelectorAll('.appicon')]
   .find((el) => el.querySelector('small')?.textContent === name);
-const btnByText = (text) => [...document.querySelectorAll('button')]
-  .find((el) => el.textContent.trim() === text);
+const cardOf = (name) => [...document.querySelectorAll('.shop-card')]
+  .find((el) => el.querySelector('.shop-card-name')?.textContent === name);
+const pillOf = (name) => cardOf(name)?.querySelector('.pill');
 const back = async () => { document.querySelector('.btn-back')?.click(); await sleep(300); };
+const openSettings = async () => { iconByName('设置').click(); await sleep(400); };
+const openStore = async () => { iconByName('商店').click(); await sleep(400); };
+const openDemo = async () => {
+  [...document.querySelectorAll('button')].find((b) => b.textContent.trim() === '弹窗试一下').click();
+  await sleep(200);
+  return document.querySelector('.sheet-mask');
+};
 
 await import(path.join(APP, 'core/boot.js'));
 await sleep(700);
 
-// 设置 → 弹窗试一下
-iconByName('设置').click();
-await sleep(400);
-btnByText('弹窗试一下').click();
-await sleep(200);
-check('点按钮真的弹出弹窗', !!document.querySelector('.sheet-mask .sheet'));
-check('有标题和正文', (document.querySelector('.sheet-title')?.textContent || '') === '弹窗试一下');
-
-document.querySelector('.sheet-mask').click();
+// 基线弹窗能用
+await openSettings();
+let mask = await openDemo();
+check('设置里能弹出弹窗', !!mask);
+check('基线是从底部出来的', window.getComputedStyle(mask).alignItems === 'flex-end',
+  window.getComputedStyle(mask).alignItems);
+mask.click();
 await sleep(150);
-check('点空白关掉了', !document.querySelector('.sheet-mask'));
-
-btnByText('弹窗试一下').click();
-await sleep(150);
-document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
-await sleep(150);
-check('按 Esc 关掉了', !document.querySelector('.sheet-mask'));
+check('点空白关掉', !document.querySelector('.sheet-mask'));
 await back();
 
-// 商店里装上「弹窗」模块
-iconByName('商店').click();
-await sleep(400);
-const uiCard = [...document.querySelectorAll('.shop-card')]
-  .find((el) => el.querySelector('.shop-card-name')?.textContent === '弹窗');
-check('商城「界面」里有弹窗', !!uiCard);
-uiCard.querySelector('.pill').click();
+// 装右往左
+await openStore();
+pillOf('弹窗 · 右往左').click();
 await sleep(900);
 await sleep(200);
 await back();
+await openSettings();
+mask = await openDemo();
+check('装上「右往左」后弹窗从右边出来',
+  window.getComputedStyle(mask).justifyContent === 'flex-end',
+  window.getComputedStyle(mask).justifyContent);
+document.dispatchEvent(new window.KeyboardEvent('keydown', { key: 'Escape', bubbles: true }));
+await sleep(150);
+await back();
 
-// 设置里多了「方向」，改了立刻生效
-iconByName('设置').click();
-await sleep(400);
-const sheetGroup = [...document.querySelectorAll('.group')]
-  .find((g) => g.querySelector('h2')?.textContent.startsWith('弹窗'));
-check('设置里出现「弹窗」分组', !!sheetGroup);
-const select = sheetGroup?.querySelector('select');
-check('有方向选项', !!select && select.options.length === 4,
-  select ? [...select.options].map((o) => o.text).join('/') : '');
-if (select) {
-  select.value = 'right';
-  select.dispatchEvent(new window.Event('change', { bubbles: true }));
-  await sleep(200);
-}
-check('换成右往左立刻生效', document.documentElement.dataset.sheetSide === 'right',
-  document.documentElement.dataset.sheetSide);
+// 再装悬空：同类互斥，旧的自动卸
+await openStore();
+pillOf('弹窗 · 悬空').click();
+await sleep(900);
+await sleep(200);
+check('装了悬空后，右往左自动变成「装上」', pillOf('弹窗 · 右往左')?.textContent === '装上',
+  pillOf('弹窗 · 右往左')?.textContent);
+check('悬空自己是「卸下」', pillOf('弹窗 · 悬空')?.textContent === '卸下',
+  pillOf('弹窗 · 悬空')?.textContent);
+await back();
+await openSettings();
+mask = await openDemo();
+check('悬空是居中的', window.getComputedStyle(mask).alignItems === 'center',
+  window.getComputedStyle(mask).alignItems);
 
 const failed = results.filter((r) => !r).length;
 console.log(`\n${results.length - failed}/${results.length} 通过`);

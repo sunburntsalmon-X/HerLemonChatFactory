@@ -1,0 +1,9 @@
+/* 悬空：居中卡片，四角圆 */
+.sheet-mask { align-items: center; padding: var(--sp-5); }
+.sheet {
+  width: min(100%, 380px); max-height: 76vh;
+  border-radius: 20px;
+  animation: sheet-in-float .2s var(--ease);
+}
+.sheet-handle { display: none; }
+@keyframes sheet-in-float { from { transform: scale(.96); opacity: 0; } }

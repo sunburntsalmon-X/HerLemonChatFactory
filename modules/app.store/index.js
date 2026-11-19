@@ -207,6 +207,9 @@ export default {
           disabled: !act.run,
           onclick: act.run,
         }, act.label),
+        item.category
+          ? h('p', { class: 'shop-note' }, '同类只能装一个，装新的会自动换掉旧的')
+          : null,
         ...sections.map(([title, text]) => h('section', { class: 'shop-section' },
           h('h3', {}, title),
           h('p', {}, text))),
