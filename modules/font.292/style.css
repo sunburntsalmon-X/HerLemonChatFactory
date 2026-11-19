@@ -1,0 +1,6 @@
+/* 霞鹜文楷（ZeoSeven #292）。CDN 不通时回落到系统字体，不会白屏。 */
+@import url("https://fontsapi.zeoseven.com/292/main/result.css");
+
+body, button, input, textarea, select, .sheet, .bubble {
+  font-family: "LXGW WenKai", "Noto Sans CJK", "PingFang SC", system-ui, sans-serif;
+}

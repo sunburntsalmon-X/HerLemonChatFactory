@@ -1,0 +1,6 @@
+/* 资源圆体（ZeoSeven #989）。CDN 不通时回落到系统字体，不会白屏。 */
+@import url("https://fontsapi.zeoseven.com/989/main/result.css");
+
+body, button, input, textarea, select, .sheet, .bubble {
+  font-family: "Resource Han Rounded SC", "Noto Sans CJK", "PingFang SC", system-ui, sans-serif;
+}

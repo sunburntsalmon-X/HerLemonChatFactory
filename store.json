@@ -14,9 +14,9 @@
         "fg": "#e6e9f0",
         "dim": "#8b93a3",
         "accent": "#9db8d2",
+        "deco": "#9db8d2",
         "danger": "#e08a8a"
-      },
-      "wallpaper": "radial-gradient(120% 80% at 100% 0%, #1a2130 0%, transparent 55%)"
+      }
     },
     {
       "id": "paper",
@@ -30,9 +30,9 @@
         "fg": "#24221e",
         "dim": "#7b756b",
         "accent": "#a9663f",
+        "deco": "#a9663f",
         "danger": "#b3443c"
-      },
-      "wallpaper": "radial-gradient(120% 80% at 100% 0%, #fbf1e3 0%, transparent 60%)"
+      }
     },
     {
       "id": "moss",
@@ -46,9 +46,9 @@
         "fg": "#e5ebe6",
         "dim": "#8b9a90",
         "accent": "#8cc9a0",
+        "deco": "#8cc9a0",
         "danger": "#d98b84"
-      },
-      "wallpaper": "radial-gradient(120% 80% at 0% 0%, #17281e 0%, transparent 55%)"
+      }
     },
     {
       "id": "plum",
@@ -62,9 +62,9 @@
         "fg": "#eae6f2",
         "dim": "#948da6",
         "accent": "#b9a2e0",
+        "deco": "#b9a2e0",
         "danger": "#d98d9e"
-      },
-      "wallpaper": "radial-gradient(120% 80% at 100% 0%, #241a33 0%, transparent 55%)"
+      }
     },
     {
       "id": "sand",
@@ -78,9 +78,9 @@
         "fg": "#2a2620",
         "dim": "#7d7365",
         "accent": "#b07d3f",
+        "deco": "#b07d3f",
         "danger": "#a8463b"
-      },
-      "wallpaper": "radial-gradient(120% 80% at 0% 0%, #fdf6e8 0%, transparent 60%)"
+      }
     },
     {
       "id": "neon",
@@ -94,9 +94,1149 @@
         "fg": "#e9eef8",
         "dim": "#8b96ab",
         "accent": "#5eead4",
+        "deco": "#5eead4",
         "danger": "#f87171"
-      },
-      "wallpaper": "radial-gradient(120% 80% at 100% 0%, #1d2b4d 0%, transparent 55%), radial-gradient(90% 60% at -10% 100%, #12333a 0%, transparent 55%)"
+      }
+    },
+    {
+      "id": "dark-deep",
+      "name": "深邃黑夜",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#000000",
+        "fg": "#E0E0E0",
+        "accent": "#C5A059",
+        "deco": "#C5A059"
+      }
+    },
+    {
+      "id": "dark-soft",
+      "name": "柔和深空",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#1a1a2e",
+        "fg": "#eaeaea",
+        "accent": "#e94560",
+        "deco": "#e94560"
+      }
+    },
+    {
+      "id": "dark-ocean",
+      "name": "深海蓝",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#0a192f",
+        "fg": "#ccd6f6",
+        "accent": "#64ffda",
+        "deco": "#64ffda"
+      }
+    },
+    {
+      "id": "dark-forest",
+      "name": "森林绿",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#0d1b0d",
+        "fg": "#c8e6c9",
+        "accent": "#81c784",
+        "deco": "#81c784"
+      }
+    },
+    {
+      "id": "dark-sunset",
+      "name": "日落橙",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#1a0a0a",
+        "fg": "#ffe0b2",
+        "accent": "#ff7043",
+        "deco": "#ff7043"
+      }
+    },
+    {
+      "id": "dark-purple",
+      "name": "暗夜紫",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#1a0a1a",
+        "fg": "#e8d5f7",
+        "accent": "#b967ff",
+        "deco": "#b967ff"
+      }
+    },
+    {
+      "id": "light-warm",
+      "name": "暖色亮色",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#F5F0E8",
+        "fg": "#1A1A1A",
+        "accent": "#9A7B2E",
+        "deco": "#9A7B2E"
+      }
+    },
+    {
+      "id": "light-clean",
+      "name": "清爽亮色",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FFFFFF",
+        "fg": "#212121",
+        "accent": "#2196F3",
+        "deco": "#2196F3"
+      }
+    },
+    {
+      "id": "light-paper",
+      "name": "护眼纸白",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FDFBF7",
+        "fg": "#2C2C2C",
+        "accent": "#8B7355",
+        "deco": "#8B7355"
+      }
+    },
+    {
+      "id": "light-mint",
+      "name": "薄荷清新",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#F0F7F4",
+        "fg": "#1A3A2A",
+        "accent": "#2E8B57",
+        "deco": "#2E8B57"
+      }
+    },
+    {
+      "id": "light-peach",
+      "name": "蜜桃暖阳",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FFF5EB",
+        "fg": "#3D2914",
+        "accent": "#E07B39",
+        "deco": "#E07B39"
+      }
+    },
+    {
+      "id": "light-lavender",
+      "name": "薰衣草紫",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#F8F5FA",
+        "fg": "#2D2438",
+        "accent": "#7B68EE",
+        "deco": "#7B68EE"
+      }
+    },
+    {
+      "id": "morandi-pink",
+      "name": "莫兰迪粉",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#e8d5d0",
+        "fg": "#4a3f3a",
+        "accent": "#5b8a72",
+        "deco": "#5b8a72"
+      }
+    },
+    {
+      "id": "morandi-green",
+      "name": "莫兰迪绿",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#d4ddd6",
+        "fg": "#2f3528",
+        "accent": "#b85c5c",
+        "deco": "#b85c5c"
+      }
+    },
+    {
+      "id": "morandi-blue",
+      "name": "莫兰迪蓝",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#c9d3d8",
+        "fg": "#2a333c",
+        "accent": "#d4a373",
+        "deco": "#d4a373"
+      }
+    },
+    {
+      "id": "morandi-dusk",
+      "name": "莫兰迪·晚霞",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#dbd4b8",
+        "fg": "#362d33",
+        "accent": "#d57069",
+        "deco": "#d57069"
+      }
+    },
+    {
+      "id": "candy-pink",
+      "name": "糖果粉",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#fed9be",
+        "fg": "#4a2c3a",
+        "accent": "#eb4b5c",
+        "deco": "#eb4b5c"
+      }
+    },
+    {
+      "id": "candy-blue",
+      "name": "糖果蓝",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#bde4f4",
+        "fg": "#404969",
+        "accent": "#ff7f50",
+        "deco": "#ff7f50"
+      }
+    },
+    {
+      "id": "candy-yellow",
+      "name": "糖果黄",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#fce38a",
+        "fg": "#2d3436",
+        "accent": "#f38181",
+        "deco": "#f38181"
+      }
+    },
+    {
+      "id": "zhusha-old-paper",
+      "name": "朱砂旧纸",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#EDEBDD",
+        "fg": "#161717",
+        "accent": "#B63000",
+        "deco": "#B63000"
+      }
+    },
+    {
+      "id": "taoyuan-sunlight",
+      "name": "苔原晴光",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#BBC397",
+        "fg": "#1C2A1A",
+        "accent": "#FFC9C4",
+        "deco": "#FFC9C4"
+      }
+    },
+    {
+      "id": "yaohuo-autumn",
+      "name": "窑火秋山",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#E9D4AF",
+        "fg": "#A74713",
+        "accent": "#6CB4A5",
+        "deco": "#6CB4A5"
+      }
+    },
+    {
+      "id": "jiangmei-ember",
+      "name": "绛梅烬雪",
+      "summary": "深色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#380D06",
+        "fg": "#F4D2BE",
+        "accent": "#BD4855",
+        "deco": "#BD4855"
+      }
+    },
+    {
+      "id": "oriental-matcha",
+      "name": "春日·抹茶",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#bfc6ac",
+        "fg": "#3a4a3a",
+        "accent": "#b17a5d",
+        "deco": "#b17a5d"
+      }
+    },
+    {
+      "id": "oriental-tea",
+      "name": "秋日·茶香",
+      "summary": "深色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#5a503f",
+        "fg": "#f4ecdc",
+        "accent": "#dbd4b8",
+        "deco": "#dbd4b8"
+      }
+    },
+    {
+      "id": "oriental-fogblue",
+      "name": "暮山·蓝雾",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#9fc0cf",
+        "fg": "#c6554e",
+        "accent": "#f4f3ec",
+        "deco": "#f4f3ec"
+      }
+    },
+    {
+      "id": "candy-mitang",
+      "name": "糖果·蜜糖",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#fce3cd",
+        "fg": "#c6554e",
+        "accent": "#88a0cb",
+        "deco": "#88a0cb"
+      }
+    },
+    {
+      "id": "candy-sakura",
+      "name": "糖果·樱粉",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#fad5d6",
+        "fg": "#d45758",
+        "accent": "#f6bcb3",
+        "deco": "#f6bcb3"
+      }
+    },
+    {
+      "id": "morandi-fogblue",
+      "name": "莫兰迪·雾蓝",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#a1a8ae",
+        "fg": "#eaecef",
+        "accent": "#09568c",
+        "deco": "#09568c"
+      }
+    },
+    {
+      "id": "dark-deepnight",
+      "name": "深海·静夜",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#09568c",
+        "fg": "#8d9ca0",
+        "accent": "#c9c2bd",
+        "deco": "#c9c2bd"
+      }
+    },
+    {
+      "id": "candy-watermelon",
+      "name": "糖果·西瓜",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#f19592",
+        "fg": "#3a4a2a",
+        "accent": "#f0e7d7",
+        "deco": "#f0e7d7"
+      }
+    },
+    {
+      "id": "candy-peach",
+      "name": "糖果·蜜桃",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#b2d4b4",
+        "fg": "#5a3a2a",
+        "accent": "#e48393",
+        "deco": "#e48393"
+      }
+    },
+    {
+      "id": "candy-greengrape",
+      "name": "糖果·青提",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#c0dea7",
+        "fg": "#f19592",
+        "accent": "#fbfad5",
+        "deco": "#fbfad5"
+      }
+    },
+    {
+      "id": "candy-rose",
+      "name": "糖果·玫红",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#E84E66",
+        "fg": "#EDE3D9",
+        "accent": "#0B1644",
+        "deco": "#0B1644"
+      }
+    },
+    {
+      "id": "morandi-lavender",
+      "name": "莫兰迪·薰衣草夜",
+      "summary": "深色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#877A92",
+        "fg": "#EDE3D9",
+        "accent": "#0B1644",
+        "deco": "#0B1644"
+      }
+    },
+    {
+      "id": "oriental-wheat",
+      "name": "节气·麦黄",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#F6EBB6",
+        "fg": "#3E6343",
+        "accent": "#F1BC1A",
+        "deco": "#F1BC1A"
+      }
+    },
+    {
+      "id": "oriental-grass",
+      "name": "节气·草色",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#74A455",
+        "fg": "#2a3e2a",
+        "accent": "#A2D7D4",
+        "deco": "#A2D7D4"
+      }
+    },
+    {
+      "id": "oriental-grainrain",
+      "name": "节气·谷雨",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#CBD565",
+        "fg": "#2a2a3a",
+        "accent": "#141722",
+        "deco": "#141722"
+      }
+    },
+    {
+      "id": "oriental-clay",
+      "name": "节气·陶土",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#A7826E",
+        "fg": "#452818",
+        "accent": "#672E1D",
+        "deco": "#672E1D"
+      }
+    },
+    {
+      "id": "oriental-persimmon",
+      "name": "节气·柿霜",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#E3F2E5",
+        "fg": "#8F4743",
+        "accent": "#F1AC5A",
+        "deco": "#F1AC5A"
+      }
+    },
+    {
+      "id": "oriental-qiuniu",
+      "name": "节气·秋酿",
+      "summary": "深色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#6C0B23",
+        "fg": "#E9E8E3",
+        "accent": "#A86743",
+        "deco": "#A86743"
+      }
+    },
+    {
+      "id": "morandi-wine",
+      "name": "莫兰迪·酒紫",
+      "summary": "深色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#5E3645",
+        "fg": "#DAEBF3",
+        "accent": "#BB3F20",
+        "deco": "#BB3F20"
+      }
+    },
+    {
+      "id": "light-dreamblue",
+      "name": "清新·梦蓝",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#C0E3F5",
+        "fg": "#3a4a5a",
+        "accent": "#A9CD65",
+        "deco": "#A9CD65"
+      }
+    },
+    {
+      "id": "dark-winterorange",
+      "name": "深邃·冬橙",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#111634",
+        "fg": "#ECEBE9",
+        "accent": "#F47A20",
+        "deco": "#F47A20"
+      }
+    },
+    {
+      "id": "dark-winterink",
+      "name": "深邃·冬墨",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#0B182D",
+        "fg": "#EFEAE6",
+        "accent": "#D1E3E6",
+        "deco": "#D1E3E6"
+      }
+    },
+    {
+      "id": "dark-abyss",
+      "name": "深邃·极夜",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#0A0A12",
+        "fg": "#E5E7EB",
+        "accent": "#6366f1",
+        "deco": "#6366f1"
+      }
+    },
+    {
+      "id": "dark-amethyst",
+      "name": "深邃·暗紫",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#2A1B3D",
+        "fg": "#EDE3D9",
+        "accent": "#B49BC8",
+        "deco": "#B49BC8"
+      }
+    },
+    {
+      "id": "dark-navy",
+      "name": "深邃·藏青",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#0D2A4A",
+        "fg": "#B0C4DE",
+        "accent": "#4A90E2",
+        "deco": "#4A90E2"
+      }
+    },
+    {
+      "id": "light-sunrise",
+      "name": "清新·晨曦",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FFF5E6",
+        "fg": "#3a2a1a",
+        "accent": "#FF9A5A",
+        "deco": "#FF9A5A"
+      }
+    },
+    {
+      "id": "light-snow",
+      "name": "清新·薄雪",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#F5F7FA",
+        "fg": "#1A2942",
+        "accent": "#5B8FF9",
+        "deco": "#5B8FF9"
+      }
+    },
+    {
+      "id": "light-berry",
+      "name": "清新·莓果",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FBEDF0",
+        "fg": "#431825",
+        "accent": "#C9455E",
+        "deco": "#C9455E"
+      }
+    },
+    {
+      "id": "light-lemon",
+      "name": "清新·鹅黄",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FBF6DE",
+        "fg": "#3D3418",
+        "accent": "#B8912A",
+        "deco": "#B8912A"
+      }
+    },
+    {
+      "id": "light-cyan",
+      "name": "清新·浅葱",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#E6F5F7",
+        "fg": "#153A40",
+        "accent": "#178C96",
+        "deco": "#178C96"
+      }
+    },
+    {
+      "id": "light-indigo",
+      "name": "清新·黛青",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#EDEFFA",
+        "fg": "#23284A",
+        "accent": "#4F5DB8",
+        "deco": "#4F5DB8"
+      }
+    },
+    {
+      "id": "light-lime",
+      "name": "清新·青柠",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#F0F7E2",
+        "fg": "#273618",
+        "accent": "#679B2E",
+        "deco": "#679B2E"
+      }
+    },
+    {
+      "id": "light-magenta",
+      "name": "清新·洋红",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FAEDF7",
+        "fg": "#3D1B38",
+        "accent": "#A63E92",
+        "deco": "#A63E92"
+      }
+    },
+    {
+      "id": "light-crimson",
+      "name": "清新·绯红",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FBECEA",
+        "fg": "#3E1613",
+        "accent": "#C0392B",
+        "deco": "#C0392B"
+      }
+    },
+    {
+      "id": "light-pink",
+      "name": "清新·樱粉",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#FBEFF5",
+        "fg": "#3D1B2A",
+        "accent": "#D4547F",
+        "deco": "#D4547F"
+      }
+    },
+    {
+      "id": "light-gray",
+      "name": "清新·云灰",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#F0F1F3",
+        "fg": "#2A323A",
+        "accent": "#53616E",
+        "deco": "#53616E"
+      }
+    },
+    {
+      "id": "morandi-apricot",
+      "name": "莫兰迪·陶杏",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#D8C6B8",
+        "fg": "#40332A",
+        "accent": "#5F7D82",
+        "deco": "#5F7D82"
+      }
+    },
+    {
+      "id": "morandi-celadon",
+      "name": "莫兰迪·青瓷",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#CCD6CF",
+        "fg": "#2E3A33",
+        "accent": "#8F6A5C",
+        "deco": "#8F6A5C"
+      }
+    },
+    {
+      "id": "oriental-skyblue",
+      "name": "雨过·天青",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#D4E2E6",
+        "fg": "#243740",
+        "accent": "#45788C",
+        "deco": "#45788C"
+      }
+    },
+    {
+      "id": "oriental-tile",
+      "name": "黛瓦·烟雨",
+      "summary": "深色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#3F4A54",
+        "fg": "#DDE4E2",
+        "accent": "#A8C3B7",
+        "deco": "#A8C3B7"
+      }
+    },
+    {
+      "id": "dark-neon",
+      "name": "深邃·霓虹夜",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#14101F",
+        "fg": "#E8E3F0",
+        "accent": "#FF5C8A",
+        "deco": "#FF5C8A"
+      }
+    },
+    {
+      "id": "dark-emerald",
+      "name": "深邃·翡翠夜",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#071A14",
+        "fg": "#CDEFE3",
+        "accent": "#35D0A0",
+        "deco": "#35D0A0"
+      }
+    },
+    {
+      "id": "dark-firefly",
+      "name": "深邃·流萤",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#101708",
+        "fg": "#EFEEDA",
+        "accent": "#DCE86A",
+        "deco": "#DCE86A"
+      }
+    },
+    {
+      "id": "dark-lapis",
+      "name": "深邃·青金石",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#10142E",
+        "fg": "#D9E6F5",
+        "accent": "#4DA8F0",
+        "deco": "#4DA8F0"
+      }
+    },
+    {
+      "id": "light-seasalt",
+      "name": "清新·海盐",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#E8F5F3",
+        "fg": "#12403C",
+        "accent": "#17A398",
+        "deco": "#17A398"
+      }
+    },
+    {
+      "id": "light-clearsky",
+      "name": "清新·晴空",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#DCEFFB",
+        "fg": "#17324A",
+        "accent": "#1976D2",
+        "deco": "#1976D2"
+      }
+    },
+    {
+      "id": "light-cocoa",
+      "name": "清新·可可奶",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#F3ECE3",
+        "fg": "#3A2A1E",
+        "accent": "#A9744B",
+        "deco": "#A9744B"
+      }
+    },
+    {
+      "id": "morandi-graphite",
+      "name": "莫兰迪·石墨",
+      "summary": "深色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#3A3D42",
+        "fg": "#E6E3DE",
+        "accent": "#C9A87C",
+        "deco": "#C9A87C"
+      }
+    },
+    {
+      "id": "morandi-roserain",
+      "name": "莫兰迪·雾玫瑰",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#C4A8A6",
+        "fg": "#3A2E30",
+        "accent": "#33566B",
+        "deco": "#33566B"
+      }
+    },
+    {
+      "id": "morandi-oat",
+      "name": "莫兰迪·燕麦",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#E2DAC9",
+        "fg": "#3A352C",
+        "accent": "#5E705C",
+        "deco": "#5E705C"
+      }
+    },
+    {
+      "id": "candy-grape",
+      "name": "糖果·葡萄汽水",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#CDB8F0",
+        "fg": "#3A2A5E",
+        "accent": "#C94F7C",
+        "deco": "#C94F7C"
+      }
+    },
+    {
+      "id": "candy-blueberry",
+      "name": "糖果·蓝莓芝士",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#B9C8F5",
+        "fg": "#2A3055",
+        "accent": "#D14D7A",
+        "deco": "#D14D7A"
+      }
+    },
+    {
+      "id": "candy-creamsoda",
+      "name": "糖果·奶油苏打",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#C4EFE4",
+        "fg": "#1F4A3C",
+        "accent": "#F0642F",
+        "deco": "#F0642F"
+      }
+    },
+    {
+      "id": "candy-lemonsprite",
+      "name": "糖果·柠檬雪碧",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#F4F8BE",
+        "fg": "#3A4A1E",
+        "accent": "#2FA896",
+        "deco": "#2FA896"
+      }
+    },
+    {
+      "id": "oriental-rouge",
+      "name": "东方·胭脂",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#F2E6E2",
+        "fg": "#3D1A1E",
+        "accent": "#9D2933",
+        "deco": "#9D2933"
+      }
+    },
+    {
+      "id": "oriental-qinghua",
+      "name": "东方·青花瓷",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#E8F1F8",
+        "fg": "#1E2A3A",
+        "accent": "#1B4B8F",
+        "deco": "#1B4B8F"
+      }
+    },
+    {
+      "id": "oriental-amber",
+      "name": "东方·琥珀",
+      "summary": "深色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#2E1E0C",
+        "fg": "#F2E4C8",
+        "accent": "#D98E32",
+        "deco": "#D98E32"
+      }
+    },
+    {
+      "id": "oriental-lotus",
+      "name": "东方·藕荷",
+      "summary": "浅色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#E8D5DE",
+        "fg": "#40304A",
+        "accent": "#6E5A7E",
+        "deco": "#6E5A7E"
+      }
+    },
+    {
+      "id": "morandi-caramel",
+      "name": "莫兰迪·焦糖米",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#E7D9C3",
+        "fg": "#453425",
+        "accent": "#A9782F",
+        "deco": "#A9782F"
+      }
+    },
+    {
+      "id": "morandi-terracotta",
+      "name": "莫兰迪·赤陶玫",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#DBBDB4",
+        "fg": "#3B2523",
+        "accent": "#8A3F35",
+        "deco": "#8A3F35"
+      }
+    },
+    {
+      "id": "morandi-shabby",
+      "name": "莫兰迪·旧布艺",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#EDE6D8",
+        "fg": "#3F372B",
+        "accent": "#7D7561",
+        "deco": "#7D7561"
+      }
+    },
+    {
+      "id": "morandi-herbal",
+      "name": "莫兰迪·药草园",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#E6EAD3",
+        "fg": "#37412D",
+        "accent": "#85709E",
+        "deco": "#85709E"
+      }
+    },
+    {
+      "id": "morandi-succulent",
+      "name": "莫兰迪·多肉盆栽",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#D2DAC4",
+        "fg": "#2F3A2A",
+        "accent": "#9C6072",
+        "deco": "#9C6072"
+      }
+    },
+    {
+      "id": "oriental-olive",
+      "name": "东方·橄榄香草",
+      "summary": "深色 · oriental",
+      "category": "oriental",
+      "vars": {
+        "bg": "#2E3324",
+        "fg": "#EDE6CF",
+        "accent": "#C9A64B",
+        "deco": "#C9A64B"
+      }
+    },
+    {
+      "id": "light-summerdish",
+      "name": "清新·夏日凉菜",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#DDEBCE",
+        "fg": "#2E4A38",
+        "accent": "#C4667A",
+        "deco": "#C4667A"
+      }
+    },
+    {
+      "id": "dark-chestnut",
+      "name": "深邃·栗棕夜",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#261B15",
+        "fg": "#F2E5D3",
+        "accent": "#C98F4E",
+        "deco": "#C98F4E"
+      }
+    },
+    {
+      "id": "dark-succulent",
+      "name": "深邃·多肉夜",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#1F2A20",
+        "fg": "#E6EDDD",
+        "accent": "#C99A8A",
+        "deco": "#C99A8A"
+      }
+    },
+    {
+      "id": "morandi-mauvelinen",
+      "name": "莫兰迪·棕紫旧布",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#D8CFC2",
+        "fg": "#3B332C",
+        "accent": "#8A6E85",
+        "deco": "#8A6E85"
+      }
+    },
+    {
+      "id": "morandi-pinkherb",
+      "name": "莫兰迪·粉草药",
+      "summary": "浅色 · morandi",
+      "category": "morandi",
+      "vars": {
+        "bg": "#E9DDE0",
+        "fg": "#3A3138",
+        "accent": "#748F6B",
+        "deco": "#748F6B"
+      }
+    },
+    {
+      "id": "light-peachsucculent",
+      "name": "清新·多肉桃杏",
+      "summary": "浅色 · light",
+      "category": "light",
+      "vars": {
+        "bg": "#E3EDE0",
+        "fg": "#33453A",
+        "accent": "#C98A6A",
+        "deco": "#C98A6A"
+      }
+    },
+    {
+      "id": "candy-namullime",
+      "name": "糖果·凉菜青柠",
+      "summary": "浅色 · candy",
+      "category": "candy",
+      "vars": {
+        "bg": "#EAF2D2",
+        "fg": "#35452F",
+        "accent": "#6A94B4",
+        "deco": "#6A94B4"
+      }
+    },
+    {
+      "id": "dark-shabbylamp",
+      "name": "深邃·旧布灯影",
+      "summary": "深色 · dark",
+      "category": "dark",
+      "vars": {
+        "bg": "#332C23",
+        "fg": "#EFE5D4",
+        "accent": "#B49A72",
+        "deco": "#B49A72"
+      }
     }
   ],
   "modules": [
@@ -417,6 +1557,310 @@
       "tutorial": "打开商城 → 找到它 → 点右下角的按钮。",
       "screenshots": [],
       "category": "background"
+    },
+    {
+      "id": "font.285",
+      "kind": "ui",
+      "name": "字体 · 思源宋体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成思源宋体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.69",
+      "kind": "ui",
+      "name": "字体 · 思源黑体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成思源黑体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.292",
+      "kind": "ui",
+      "name": "字体 · 霞鹜文楷",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成霞鹜文楷",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.7",
+      "kind": "ui",
+      "name": "字体 · 朱雀仿宋",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成朱雀仿宋",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.441",
+      "kind": "ui",
+      "name": "字体 · 江城解星体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成江城解星体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.989",
+      "kind": "ui",
+      "name": "字体 · 资源圆体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成资源圆体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.136",
+      "kind": "ui",
+      "name": "字体 · 句读黑体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成句读黑体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.480",
+      "kind": "ui",
+      "name": "字体 · 仓耳非白",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成仓耳非白",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.36",
+      "kind": "ui",
+      "name": "字体 · 全字库正楷体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成全字库正楷体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.638",
+      "kind": "ui",
+      "name": "字体 · 呆萌手写体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成呆萌手写体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.13",
+      "kind": "ui",
+      "name": "字体 · 文渊黑体 SC",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成文渊黑体 SC",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.414",
+      "kind": "ui",
+      "name": "字体 · 文渊圆体 SC",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成文渊圆体 SC",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.895",
+      "kind": "ui",
+      "name": "字体 · 隙间黑体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成隙间黑体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.256",
+      "kind": "ui",
+      "name": "字体 · 汇文明朝体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成汇文明朝体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.309",
+      "kind": "ui",
+      "name": "字体 · 京华老宋体",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成京华老宋体",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
+    },
+    {
+      "id": "font.442",
+      "kind": "ui",
+      "name": "字体 · Maple Mono NF-CN",
+      "version": "0.1.0",
+      "icon": "字",
+      "category": "font",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "把整个应用的字体换成Maple Mono NF-CN",
+      "detail": "换的是全局字体。同类只能装一个，装了别的字体会自动换掉。字体从网上加载，第一次会慢一点；加载不到就用系统字体，不会白屏。",
+      "tutorial": "装上就生效；想换回来就装别的字体，或卸下。",
+      "screenshots": [],
+      "tags": [
+        "字体",
+        "界面"
+      ]
     }
   ]
 }

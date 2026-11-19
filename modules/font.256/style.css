@@ -1,0 +1,6 @@
+/* 汇文明朝体（ZeoSeven #256）。CDN 不通时回落到系统字体，不会白屏。 */
+@import url("https://fontsapi.zeoseven.com/256/main/result.css");
+
+body, button, input, textarea, select, .sheet, .bubble {
+  font-family: "Huiwen-mincho", "Noto Sans CJK", "PingFang SC", system-ui, sans-serif;
+}

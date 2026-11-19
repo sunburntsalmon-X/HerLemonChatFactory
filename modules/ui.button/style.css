@@ -17,7 +17,7 @@
 .btn.primary {
   border-color: var(--accent);
   background: transparent;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .btn.primary:active { background: color-mix(in srgb, var(--accent) 12%, transparent); }
 .btn.danger {
@@ -30,7 +30,7 @@
   border-style: solid;
   border-color: var(--accent);
   background: transparent;
-  color: var(--accent);
+  color: var(--accent-text);
 }
 .btn-send:active { background: color-mix(in srgb, var(--accent) 12%, transparent); }
 
@@ -38,5 +38,5 @@
 .pill.on {
   border-color: var(--accent);
   background: transparent;
-  color: var(--accent);
+  color: var(--accent-text);
 }

@@ -1,0 +1,6 @@
+/* 京华老宋体（ZeoSeven #309）。CDN 不通时回落到系统字体，不会白屏。 */
+@import url("https://fontsapi.zeoseven.com/309/main/result.css");
+
+body, button, input, textarea, select, .sheet, .bubble {
+  font-family: "KingHwaOldSong", "Noto Sans CJK", "PingFang SC", system-ui, sans-serif;
+}

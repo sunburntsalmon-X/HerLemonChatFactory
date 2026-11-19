@@ -1,0 +1,6 @@
+/* 思源宋体（ZeoSeven #285）。CDN 不通时回落到系统字体，不会白屏。 */
+@import url("https://fontsapi.zeoseven.com/285/main/result.css");
+
+body, button, input, textarea, select, .sheet, .bubble {
+  font-family: "Noto Serif CJK", "Noto Sans CJK", "PingFang SC", system-ui, sans-serif;
+}

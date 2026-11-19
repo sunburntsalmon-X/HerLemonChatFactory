@@ -1,0 +1,6 @@
+/* 呆萌手写体（ZeoSeven #638）。CDN 不通时回落到系统字体，不会白屏。 */
+@import url("https://fontsapi.zeoseven.com/638/main/result.css");
+
+body, button, input, textarea, select, .sheet, .bubble {
+  font-family: "DymonShouXieTi", "Noto Sans CJK", "PingFang SC", system-ui, sans-serif;
+}

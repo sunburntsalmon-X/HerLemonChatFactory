@@ -1,0 +1,6 @@
+/* 文渊黑体 SC（ZeoSeven #13）。CDN 不通时回落到系统字体，不会白屏。 */
+@import url("https://fontsapi.zeoseven.com/13/main/result.css");
+
+body, button, input, textarea, select, .sheet, .bubble {
+  font-family: "WenYuan Sans SC Flex VF", "Noto Sans CJK", "PingFang SC", system-ui, sans-serif;
+}
