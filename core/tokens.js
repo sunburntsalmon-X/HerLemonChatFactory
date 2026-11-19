@@ -67,6 +67,10 @@ export function applyTheme(theme = {}, stage) {
 
   if (stage) stage.dataset.wallpaper = theme.id || '';
   document.documentElement.dataset.theme = theme.id || 'custom';
+
+  // 让 select 下拉、滚动条这些浏览器原生控件跟着主题走亮/暗，
+  // 不然深色主题里会弹出一块白的，一眼出戏。
+  root.setProperty('color-scheme', relLuminance(hexToRgb(bg)) > 0.5 ? 'light' : 'dark');
 }
 
 
@@ -86,16 +90,30 @@ function contrast(a, b) {
   return (hi + 0.05) / (lo + 0.05);
 }
 
+/** WCAG 相对亮度：先把 sRGB 转成线性，再按人眼加权 */
 function luminance(hex) {
-  const { r, g, b } = hexToRgb(hex);
-  return 0.2126 * (r / 255) + 0.7152 * (g / 255) + 0.0722 * (b / 255);
+  return relLuminance(hexToRgb(hex));
 }
 
-/** 亮点色配深字，暗点色配浅字 */
+function relLuminance({ r, g, b }) {
+  const ch = (v) => {
+    const s = v / 255;
+    return s <= 0.04045 ? s / 12.92 : ((s + 0.055) / 1.055) ** 2.4;
+  };
+  return 0.2126 * ch(r) + 0.7152 * ch(g) + 0.0722 * ch(b);
+}
+
+/**
+ * 强调色上的字：深色底配浅字，浅色底配深字。
+ *
+ * 旧版两个分支都返回近黑色，深绿 / 酱红这类深强调色上就成了
+ * "黑字压深底"，按钮和气泡糊成一块。现在按白字的对比度分档：
+ * 白字能到 3:1 就用浅字（深绿、藏蓝、朱红都走这档），否则用深字。
+ */
 function readableInk(hex) {
-  const { r, g, b } = hexToRgb(hex);
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
-  return luminance > 0.62 ? '#12140f' : '#0b0e14';
+  const light = relLuminance(hexToRgb(hex));
+  const whiteContrast = 1.05 / (light + 0.05);
+  return whiteContrast >= 3.0 ? '#f7f9f8' : '#10130f';
 }
 
 function hexToRgb(hex) {

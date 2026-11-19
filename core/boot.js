@@ -20,7 +20,7 @@ import { applyTheme } from './tokens.js';
 const root = document.getElementById('app');
 
 /** 改完前端资源就 +1：让浏览器一定拿新文件，别用旧的 JS/CSS */
-const VER = '2';
+const VER = '4';
 
 let ctx = null;
 let shellInstance = null;
