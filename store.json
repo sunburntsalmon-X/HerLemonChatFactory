@@ -248,6 +248,24 @@
       "screenshots": []
     },
     {
+      "id": "ui.sheet",
+      "kind": "ui",
+      "name": "弹窗",
+      "version": "0.1.0",
+      "icon": "▭",
+      "author": "官方",
+      "updated": "2026-11-19",
+      "difficulty": 1,
+      "summary": "弹窗四个方向：下往上、右往左、左往右、悬空",
+      "detail": "内核负责弹窗的机制（遮罩、Esc 关闭、点空白关闭），这个模块负责它从哪边出来、长什么样。方向在设置 → 弹窗里改，改完立刻生效。",
+      "tutorial": "装上它 → 设置 → 弹窗 → 选方向 → 回设置的「数据」里点「弹窗试一下」。",
+      "screenshots": [],
+      "tags": [
+        "界面",
+        "弹窗"
+      ]
+    },
+    {
       "id": "runtime.chat",
       "kind": "runtime",
       "name": "普通陪聊",

@@ -446,6 +446,36 @@ button { cursor: pointer; }
 .pill.on:active { background: color-mix(in srgb, var(--fg) 12%, var(--accent)); }
 .pill[disabled] { opacity: .38; }
 
+/* 弹窗基线：底部抽屉。方向/样子由 ui.sheet 这类模块换（D19） */
+.sheet-mask {
+  position: fixed; inset: 0; z-index: 60;
+  display: flex; align-items: flex-end; justify-content: center;
+  background: rgba(0, 0, 0, .52);
+  animation: mask-in .18s var(--ease);
+}
+.sheet {
+  width: min(100%, 420px);
+  max-height: 82vh;
+  overflow-y: auto;
+  padding: 12px var(--sp-4) calc(var(--sp-5) + var(--safe-b));
+  border-radius: 24px 24px 0 0;
+  background: var(--surface);
+  color: var(--fg);
+  box-shadow: 0 -24px 60px -30px rgba(0, 0, 0, .9);
+  animation: sheet-up .22s var(--ease);
+}
+.sheet-handle {
+  width: 36px; height: 4px; margin: 0 auto var(--sp-3);
+  border-radius: 2px; background: var(--line);
+}
+.sheet-title { margin: 0 0 var(--sp-2); font-size: var(--fs-lg); }
+.sheet-body { color: var(--dim); font-size: var(--fs); line-height: 1.7; }
+.sheet-actions { display: flex; gap: var(--sp-2); margin-top: var(--sp-4); }
+.sheet-actions .btn { margin-top: 0; }
+
+@keyframes mask-in { from { opacity: 0; } }
+@keyframes sheet-up { from { transform: translateY(28px); opacity: 0; } }
+
 /* 键盘用户：有一圈清楚的焦点环；手指点不出现，不影响观感 */
 .btn:focus-visible,
 .btn-send:focus-visible,

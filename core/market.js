@@ -8,7 +8,7 @@ export function createMarket({ vault, config }) {
   const store = vault.namespace('core');
   let manifest = { name: '商店', modules: [], themes: [] };
   // 只记"加了谁 / 删了谁"，不存整份列表——存快照会让 app.json 后来新增的永远进不来
-  let overrides = { shell: null, wallpaper: null, added: [], removed: [], featuresAdded: [], featuresRemoved: [], uiSkin: null, theme: null };
+  let overrides = { shell: null, wallpaper: null, added: [], removed: [], featuresAdded: [], featuresRemoved: [], uiAdded: [], uiRemoved: [], theme: null };
 
   async function load() {
     try {
@@ -48,20 +48,16 @@ export function createMarket({ vault, config }) {
   const SLOTS = {
     app: ['added', 'removed'],
     feature: ['featuresAdded', 'featuresRemoved'],
+    ui: ['uiAdded', 'uiRemoved'],
   };
   const slots = (kind) => SLOTS[kind] || SLOTS.app;
 
   const apps = () => resolve('apps', ...slots('app'));
   const features = () => resolve('features', ...slots('feature'));
-  // UI 是皮肤：单选。没选 = 用内核基线，所以这里最多一项
-  const ui = () => (overrides.uiSkin ? [overrides.uiSkin] : []);
+  // UI 模块可以同时装好几个（按钮皮肤、弹窗、字体各管一摊）；不装就是内核基线
+  const ui = () => resolve('ui', ...slots('ui'));
   const shell = () => overrides.shell || config.shell;
   const wallpaper = () => overrides.wallpaper || config.wallpaper || null;
-
-  async function setUi(id) {
-    overrides.uiSkin = id || null;
-    await save();
-  }
 
   async function setWallpaper(id) {
     overrides.wallpaper = id || null;
@@ -109,7 +105,7 @@ export function createMarket({ vault, config }) {
   }
 
   async function reset() {
-    overrides = { shell: null, wallpaper: null, added: [], removed: [], featuresAdded: [], featuresRemoved: [], uiSkin: null, theme: null };
+    overrides = { shell: null, wallpaper: null, added: [], removed: [], featuresAdded: [], featuresRemoved: [], uiAdded: [], uiRemoved: [], theme: null };
     await store.del('market');
   }
 
@@ -119,15 +115,15 @@ export function createMarket({ vault, config }) {
       .filter((m) => !kind || m.kind === kind)
       .map((m) => {
         // 皮肤和外壳一样是单选：同一时间只有一个生效
-        const single = m.kind === 'shell' || m.kind === 'wallpaper' || m.kind === 'ui';
+        const single = m.kind === 'shell' || m.kind === 'wallpaper';
         const on = m.kind === 'shell'
           ? shell() === m.id
           : m.kind === 'wallpaper'
             ? wallpaper() === m.id
-            : m.kind === 'ui'
-              ? ui().includes(m.id)
-              : m.kind === 'feature'
-                ? features().includes(m.id)
+            : m.kind === 'feature'
+              ? features().includes(m.id)
+              : m.kind === 'ui'
+                ? ui().includes(m.id)
                 : apps().includes(m.id);
         return { ...m, installed: on, active: single ? on : false };
       });
@@ -135,7 +131,7 @@ export function createMarket({ vault, config }) {
 
   return {
     load, list,
-    shell, apps, features, ui, setUi, setShell, wallpaper, setWallpaper, forget,
+    shell, apps, features, ui, setShell, wallpaper, setWallpaper, forget,
     themeId, themes, setTheme,
     install, uninstall, reset,
     manifest: () => manifest,
@@ -145,7 +141,7 @@ export function createMarket({ vault, config }) {
 
 /** 老数据是"整份列表"，迁移成差量，不然新增的 App 永远进不来 */
 function migrate(saved, config) {
-  const base = { shell: saved.shell || null, wallpaper: saved.wallpaper || null, theme: saved.theme || null, uiSkin: saved.uiSkin || null };
+  const base = { shell: saved.shell || null, wallpaper: saved.wallpaper || null, theme: saved.theme || null, uiAdded: [], uiRemoved: [] };
 
   if (Array.isArray(saved.apps)) {
     // 老的整份快照分不清"用户没见过"和"用户删掉了"。

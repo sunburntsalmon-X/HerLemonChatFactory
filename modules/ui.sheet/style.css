@@ -1,0 +1,52 @@
+/**
+ * 弹窗皮肤：四个方向
+ *
+ * 基线是底部抽屉；这里按 <html data-sheet-side> 换出场方向和圆角。
+ * 只覆盖 .sheet / .sheet-mask，不改内核。
+ */
+
+/* 从右边滑进来 */
+[data-sheet-side="right"] .sheet-mask {
+  align-items: stretch;
+  justify-content: flex-end;
+}
+[data-sheet-side="right"] .sheet {
+  width: min(86%, 360px);
+  max-height: none;
+  height: 100%;
+  padding-top: calc(var(--sp-5) + var(--safe-t, 0px));
+  border-radius: 20px 0 0 20px;
+  animation: sheet-in-right .22s var(--ease);
+}
+[data-sheet-side="right"] .sheet-handle { display: none; }
+
+/* 从左边滑进来 */
+[data-sheet-side="left"] .sheet-mask {
+  align-items: stretch;
+  justify-content: flex-start;
+}
+[data-sheet-side="left"] .sheet {
+  width: min(86%, 360px);
+  max-height: none;
+  height: 100%;
+  padding-top: calc(var(--sp-5) + var(--safe-t, 0px));
+  border-radius: 0 20px 20px 0;
+  animation: sheet-in-left .22s var(--ease);
+}
+[data-sheet-side="left"] .sheet-handle { display: none; }
+
+/* 悬空卡片 */
+[data-sheet-side="float"] .sheet-mask {
+  align-items: center;
+  padding: var(--sp-5);
+}
+[data-sheet-side="float"] .sheet {
+  width: min(100%, 380px);
+  border-radius: 20px;
+  animation: sheet-in-float .2s var(--ease);
+}
+[data-sheet-side="float"] .sheet-handle { display: none; }
+
+@keyframes sheet-in-right { from { transform: translateX(40px); opacity: 0; } }
+@keyframes sheet-in-left { from { transform: translateX(-40px); opacity: 0; } }
+@keyframes sheet-in-float { from { transform: scale(.96); opacity: 0; } }

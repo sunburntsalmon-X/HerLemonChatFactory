@@ -5,6 +5,7 @@
  * 装配逻辑单独抽成 assemble()，商城切换后可以直接重装，不用刷新页面。
  */
 import { h, toast, clear, sleep } from './dom.js';
+import { sheet } from './sheet.js';
 import { createBus } from './bus.js';
 import { createVault } from './vault.js';
 import { createSettings } from './settings.js';
@@ -77,7 +78,7 @@ async function boot() {
     apps,
     stage,
     reboot,
-    ui: { h, toast, clear, sleep },
+    ui: { h, toast, clear, sleep, sheet },
     applyTheme: () => applyTheme(themeNow(), stage),
   };
 

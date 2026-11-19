@@ -135,6 +135,13 @@ export default {
         h('h2', {}, '数据'),
         h('button', {
           class: 'btn',
+          onclick: () => ctx.ui.sheet({
+            title: '弹窗试一下',
+            content: '这是内核基线的底部抽屉。装上「弹窗」模块后，可以在上面的「弹窗」分组里换方向。点空白处或按 Esc 关闭。',
+          }),
+        }, '弹窗试一下'),
+        h('button', {
+          class: 'btn',
           onclick: async () => {
             const payload = {
               format: 'xiaoshouji-backup',

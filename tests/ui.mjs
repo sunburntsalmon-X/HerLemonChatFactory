@@ -93,9 +93,7 @@ await back();
 await openStore();
 check('商城有「界面」分类',
   [...document.querySelectorAll('.group h2')].some((el) => el.textContent.includes('界面')));
-check('有「内置（默认）」并且使用中',
-  pillOf('内置')?.textContent === '使用中', pillOf('内置')?.textContent);
-check('有「线框按钮」，还没用', pillOf('线框按钮')?.textContent === '使用',
+check('有「线框按钮」，还没装', pillOf('线框按钮')?.textContent === '装上',
   pillOf('线框按钮')?.textContent);
 
 // 3. 用线框按钮：当场变描边，不刷新
@@ -103,9 +101,9 @@ pillOf('线框按钮').click();
 await sleep(900);
 await sleep(200);
 check('皮肤样式表装上了', !!link());
-check('卡片改成「使用中」', pillOf('线框按钮')?.textContent === '使用中',
+check('卡片改成「卸下」', pillOf('线框按钮')?.textContent === '卸下',
   pillOf('线框按钮')?.textContent);
-check('内置退回「使用」', pillOf('内置')?.textContent === '使用', pillOf('内置')?.textContent);
+
 
 // 4. 去聊天看：发送键真的变成描边
 await back();
@@ -114,14 +112,14 @@ check('发送键变成描边（边框 1px）', sendBorder() === '1px', sendBorde
 await back();
 await back();
 
-// 5. 换回内置：立刻恢复
+// 5. 卸下皮肤：立刻回到内核基线
 await openStore();
-pillOf('内置').click();
+pillOf('线框按钮').click();
 await sleep(900);
 await sleep(200);
-check('换回内置后皮肤样式表摘掉了', !link());
-check('卡片回到「使用中」', pillOf('内置')?.textContent === '使用中',
-  pillOf('内置')?.textContent);
+check('卸下后皮肤样式表摘掉了', !link());
+check('卡片回到「装上」', pillOf('线框按钮')?.textContent === '装上',
+  pillOf('线框按钮')?.textContent);
 await back();
 await openChat();
 check('发送键回到实心（边框没了）', sendBorder() === '0px', sendBorder());

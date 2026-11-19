@@ -58,23 +58,10 @@ export default {
         active: current === t.id,
       }));
 
-      const skin = market.ui()[0] || null;
-      const uiItems = [
-        {
-          id: 'core.baseline', kind: 'ui', name: '内置（默认）', icon: '◻',
-          author: '官方', updated: '', difficulty: 1,
-          summary: '内核自带的基线样式：实心按钮，永远可用',
-          detail: '不用装任何东西就有的一套控件样式。所有皮肤都是在这套之上覆盖出来的。',
-          tutorial: '商城 → 界面 → 使用「内置（默认）」即可回到它。',
-          installed: !skin, active: !skin,
-        },
-        ...market.list('ui'),
-      ];
-
       return [
         { kind: 'shell', title: '桌面', items: market.list('shell') },
         { kind: 'app', title: '应用', items: market.list('app') },
-        { kind: 'ui', title: '界面', items: uiItems },
+        { kind: 'ui', title: '界面', items: market.list('ui'), note: '不装任何模块时，用内核基线' },
         { kind: 'feature', title: '功能', items: market.list('feature') },
         { kind: 'wallpaper', title: '背景', items: market.list('wallpaper') },
         { kind: 'theme', title: '主题色', items: themes },
@@ -137,6 +124,7 @@ export default {
         }
         nodes.push(h('div', { class: 'group' },
           h('h2', {}, group.title, h('span', { class: 'count' }, items.length)),
+          group.note ? h('p', { class: 'shop-note' }, group.note) : null,
           h('div', { class: 'shop-cards' }, items.map(card))));
       }
 
@@ -240,9 +228,9 @@ export default {
       }
       if (item.kind === 'ui') {
         return {
-          on: item.active,
-          label: item.active ? '使用中' : '使用',
-          run: () => apply('ui', item.id === 'core.baseline' ? null : item.id),
+          on: item.installed,
+          label: item.installed ? '卸下' : '装上',
+          run: () => apply(item.installed ? 'uninstall' : 'install', item.id, item.kind),
         };
       }
       if (item.kind === 'shell') {
@@ -282,7 +270,6 @@ export default {
       try {
         if (action === 'shell') await market.setShell(id);
         else if (action === 'wallpaper') await market.setWallpaper(id);
-        else if (action === 'ui') await market.setUi(id);
         else if (action === 'install') await market.install(id, kind);
         else await market.uninstall(id, kind);
 
