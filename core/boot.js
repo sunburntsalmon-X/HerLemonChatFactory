@@ -19,6 +19,9 @@ import { applyTheme } from './tokens.js';
 
 const root = document.getElementById('app');
 
+/** 改完前端资源就 +1：让浏览器一定拿新文件，别用旧的 JS/CSS */
+const VER = '2';
+
 let ctx = null;
 let shellInstance = null;
 let assembling = false;
@@ -202,7 +205,7 @@ async function reboot(reopen) {
 
 async function loadModule(id) {
   if (!id || !/^[a-z][\w.-]*$/i.test(id)) throw new Error(`非法的模块 id：${id}`);
-  const mod = await import(`../modules/${id}/index.js`);
+  const mod = await import(`../modules/${id}/index.js?v=${VER}`);
   const m = mod.default;
   if (!m) throw new Error(`${id} 没有 default 导出`);
   if (m.api !== '1.x') throw new Error(`${id} 要求 api ${m.api || '(未声明)'}，当前是 1.x`);
@@ -216,7 +219,7 @@ function injectCSS(id, file) {
   if (document.querySelector(`link[data-module="${mark}"]`)) return;
   const link = document.createElement('link');
   link.rel = 'stylesheet';
-  link.href = new URL(`../modules/${id}/${file}`, import.meta.url).href;
+  link.href = `${new URL(`../modules/${id}/${file}`, import.meta.url).href}?v=${VER}`;
   link.dataset.module = mark;
   document.head.append(link);
 }
